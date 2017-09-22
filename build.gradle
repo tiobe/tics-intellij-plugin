@@ -1,0 +1,24 @@
+plugins {
+  id "org.jetbrains.intellij" version "0.2.17"
+}
+
+intellij {
+  version '2017.2.4'
+}
+
+patchPluginXml {
+  version "${new File('../../make/TICSVERSION').text.trim()}.${SVNVERSION}"
+}
+
+repositories {
+    mavenCentral()
+}
+
+apply plugin: 'org.jetbrains.intellij'
+apply plugin: 'jacoco'
+
+jacocoTestReport {
+    reports {
+        xml.enabled true
+    }
+}
