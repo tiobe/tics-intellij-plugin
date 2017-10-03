@@ -7,6 +7,9 @@ intellij {
 }
 
 patchPluginXml {
+  if (!project.hasProperty('SVNVERSION')) {
+    ext.SVNVERSION = '?'
+  }
   version "${new File('../../make/TICSVERSION').text.trim()}.${SVNVERSION}"
 }
 
