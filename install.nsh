@@ -17,12 +17,14 @@ LangString TEXT_INTELLIJLOCATION_SUBTITLE ${LANG_ENGLISH} "Set the folder in whi
 Var INTELLIJPATH ; path to IntelliJ installation
 Var IDEINTELLIJ
 
+!define INTELLIJ_PLUGIN_NAME "TICSIntelliJ"
+
 Function InstallIntelliJ
   ${If} $INTELLIJPATH != ""
     !insertmacro SETOUTPATH "$TEMP"
     SetOverwrite on
-    File "${TICS_COMPONENTS_ROOT}\ideintellij\build\distributions\ideintellij.zip"
-    !insertmacro EXTRACTZIP "ideintellij" "$INTELLIJPATH\plugins"
+    File "${TICS_COMPONENTS_ROOT}\ideintellij\build\distributions\${INTELLIJ_PLUGIN_NAME}.zip"
+    !insertmacro EXTRACTZIP "${INTELLIJ_PLUGIN_NAME}" "$INTELLIJPATH\plugins"
     !insertmacro REGISTRY_WRITE "${UnRegKey}" "INTELLIJPATH" "$INTELLIJPATH" "REG_SZ"
   ${Endif}
 FunctionEnd
@@ -56,5 +58,5 @@ FunctionEnd
 
 Function un.intellij
   !insertmacro REGISTRY_READ "${UnRegKey}" "INTELLIJPATH" "$R0"
-  RMDir /r "$R0\plugins\ideintellij"
+  RMDir /r "$R0\plugins\${INTELLIJ_PLUGIN_NAME}"
 FunctionEnd
