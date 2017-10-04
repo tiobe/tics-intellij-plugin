@@ -23,7 +23,7 @@ Function InstallIntelliJ
     SetOverwrite on
     File "${TICS_COMPONENTS_ROOT}\ideintellij\build\distributions\ideintellij.zip"
     !insertmacro EXTRACTZIP "ideintellij" "$INTELLIJPATH\plugins"
-    WriteRegStr HKLM "${UnRegKey}" "INTELLIJPATH" "$INTELLIJPATH"
+    !insertmacro REGISTRY_WRITE "${UnRegKey}" "INTELLIJPATH" "$INTELLIJPATH" "REG_SZ"
   ${Endif}
 FunctionEnd
 
@@ -55,6 +55,6 @@ FunctionEnd
 ; Uninstall Section
 
 Function un.intellij
-  ReadRegStr $R0 HKLM "${UnRegKey}" "INTELLIJPATH"
+  !insertmacro REGISTRY_READ "${UnRegKey}" "INTELLIJPATH" "$R0"
   RMDir /r "$R0\plugins\ideintellij"
 FunctionEnd
