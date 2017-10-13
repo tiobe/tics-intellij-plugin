@@ -8,7 +8,7 @@
 DAEMON := --no-daemon # to prevent using the Gradle Daemon in CI
 GRADLE := ./gradlew -PSVNVERSION="$(SVNVERSION)" $(DAEMON)
 
-all: build
+all: build coveragereport
 
 build:
 	$(GRADLE) buildplugin
@@ -24,5 +24,7 @@ test:
 
 coveragereport: test
 	$(GRADLE) jacocoTestReport
+	-mkdir "$(TESTCOVERAGE_RESULTDIR)/ideintellij/"
+	cp build/reports/jacoco/test/jacocoTestReport.xml "$(TESTCOVERAGE_RESULTDIR)/ideintellij/"
 
 rebuild: clean all
