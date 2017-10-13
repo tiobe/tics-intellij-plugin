@@ -57,6 +57,7 @@ public class TICSAnalyzer {
         }
 
         @Override
+        @SuppressWarnings("rawtypes")
         public void onTextAvailable(ProcessEvent processEvent, Key key) {
         }
     }
