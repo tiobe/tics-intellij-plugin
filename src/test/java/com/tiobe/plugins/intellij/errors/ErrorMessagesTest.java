@@ -32,7 +32,7 @@ public class ErrorMessagesTest {
     public void getExecutionErrorMessageTest() {
         final String fullError = ERROR;
         final String actual = getExecutionErrorMessage(command, fullError);
-        final String expected = "There was a problem launching " + command + ". Please ensure " + command + " is add to the PATH " +
+        final String expected = "There was a problem launching " + command + ". Please ensure " + command + " is added to the PATH " +
                 "environment variable.\n\nThe full error was: " + fullError;
         assertEquals(expected, actual);
     }

@@ -7,7 +7,7 @@ public class ErrorMessages {
     final public static String NO_ACTIVE_PROJECT = "Could not determine active project. Please make sure the file you're analyzing is part of a project.";
     final public static String NO_ACTIVE_PROJECT_SHORT = "Could not determine active project";
 
-    final private static String EXECUTION_ERROR = "There was a problem launching %1$s. Please ensure %1$s is add to the PATH environment variable.\n\nThe full error was: %2$s";
+    final private static String EXECUTION_ERROR = "There was a problem launching %1$s. Please ensure %1$s is added to the PATH environment variable.\n\nThe full error was: %2$s";
     final private static String EXECUTION_ERROR_SHORT = "An error occurred while executing %s";
 
     public static String getExecutionErrorMessage(String command, String fullError) {
