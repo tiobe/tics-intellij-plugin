@@ -8,7 +8,7 @@
 DAEMON := --no-daemon # to prevent using the Gradle Daemon in CI
 GRADLE := ./gradlew -PSVNVERSION="$(SVNVERSION)" $(DAEMON)
 
-all: coveragereport
+all: build coveragereport
 
 build:
 	$(GRADLE) buildplugin
