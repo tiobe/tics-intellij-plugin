@@ -25,8 +25,8 @@ test:
 coveragereport:
 	$(GRADLE) test jacocoTestReport
 ifneq ($(TESTCOVERAGE_RESULTDIR),)
-	-mkdir -p "$(TESTCOVERAGE_RESULTDIR)/ideintellij/"
-	cp build/reports/jacoco/test/jacocoTestReport.xml "$(TESTCOVERAGE_RESULTDIR)/ideintellij/"
+	$(MKDIR) "$(TESTCOVERAGE_RESULTDIR)/ideintellij/"
+	cp $(COMPONENTSDIR)/ideintellij/build/reports/jacoco/test/jacocoTestReport.xml "$(TESTCOVERAGE_RESULTDIR)/ideintellij/"
 endif
 
 rebuild: clean all
