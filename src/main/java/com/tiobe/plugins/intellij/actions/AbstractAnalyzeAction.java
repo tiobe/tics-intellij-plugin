@@ -9,6 +9,7 @@ import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.DataContext;
 import com.intellij.openapi.actionSystem.DataKeys;
+import com.intellij.openapi.fileEditor.FileDocumentManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.tiobe.plugins.intellij.analyzer.TICSAnalyzer;
@@ -45,6 +46,7 @@ abstract class AbstractAnalyzeAction extends AnAction {
         }
         final ProcessHandler handler;
         try {
+            FileDocumentManager.getInstance().saveAllDocuments();
             handler = TICSAnalyzer.getInstance().run(getTICSCommand(file, project));
         } catch (ExecutionException e) {
             e.printStackTrace();
