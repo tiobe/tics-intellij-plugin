@@ -1,0 +1,22 @@
+<idea-plugin>
+    <actions>
+        <group id="TICS.Analysis" text="TICS">
+            <separator/>
+            <action id="TICS.AnalyzeFile" class="com.tiobe.plugins.intellij.actions.AnalyzeFile"
+                    text="Analyze file with TICS" icon="TiobeIcons.ANALYZE_FILE">
+            </action>
+            <action id="TICS.AnalyzeProject" class="com.tiobe.plugins.intellij.actions.AnalyzeProject"
+                    text="Analyze project with TICS" icon="TiobeIcons.ANALYZE_PROJECT">
+            </action>
+            <action id="TICS.CancelAnalysis" class="com.tiobe.plugins.intellij.actions.CancelAnalysis"
+                    text="Cancel analysis" icon="TiobeIcons.CANCEL_ANALYSIS">
+            </action>
+            <add-to-group group-id="AnalyzeMenu"/>
+            <add-to-group group-id="NavBarToolBarOthers"/>
+        </group>
+        <action id="TICS.RunTICSConfig" class="com.tiobe.plugins.intellij.actions.RunTICSConfig"
+                text="TICS Rule and Options configuration" icon="TiobeIcons.CONFIGURATION">
+            <add-to-group group-id="NavBarToolBarOthers"/>
+        </action>
+    </actions>
+</idea-plugin>
