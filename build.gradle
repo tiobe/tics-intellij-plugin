@@ -1,5 +1,5 @@
 plugins {
-  id "org.jetbrains.intellij" version "0.4.5"
+  id "org.jetbrains.intellij" version "0.4.7"
 }
 
 intellij {
@@ -10,7 +10,7 @@ patchPluginXml {
   if (!project.hasProperty('SVNVERSION')) {
     ext.SVNVERSION = '?'
   }
-  untilBuild = '183.*'
+  untilBuild = '191.*'
   version "${new File('../../make/TICSVERSION').text.trim()}.${SVNVERSION}"
 }
 
