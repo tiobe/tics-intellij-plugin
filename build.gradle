@@ -10,7 +10,7 @@ patchPluginXml {
   if (!project.hasProperty('SVNVERSION')) {
     ext.SVNVERSION = '?'
   }
-  untilBuild = '191.*'
+  untilBuild = '192.*'
   version "${new File('../../make/TICSVERSION').text.trim()}.${SVNVERSION}"
 }
 
