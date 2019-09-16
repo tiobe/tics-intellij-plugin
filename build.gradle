@@ -2,14 +2,18 @@ plugins {
   id "org.jetbrains.intellij" version "0.4.9"
 }
 
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
 intellij {
-  version '2017.2.4'
+  version '2018.1.8'
 }
 
 patchPluginXml {
   if (!project.hasProperty('SVNVERSION')) {
     ext.SVNVERSION = '?'
   }
+  sinceBuild = '172.4155'
   untilBuild = '192.*'
   version "${new File('../../make/TICSVERSION').text.trim()}.${SVNVERSION}"
 }
