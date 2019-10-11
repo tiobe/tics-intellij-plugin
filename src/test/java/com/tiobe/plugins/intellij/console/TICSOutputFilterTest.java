@@ -18,11 +18,11 @@ import static org.junit.Assert.assertTrue;
 
 @RunWith(Parameterized.class)
 public class TICSOutputFilterTest {
-    final private String input;
-    final private Result expected;
+    private final String input;
+    private final Result expected;
     private TICSOutputFilter instance;
 
-    public TICSOutputFilterTest(String input, Result expected) {
+    public TICSOutputFilterTest(final String input, final Result expected) {
         this.input = input;
         this.expected = expected;
     }
@@ -57,13 +57,13 @@ public class TICSOutputFilterTest {
         final String filePath;
         final int lineNumber;
 
-        HyperlinkMock(String filePath, int lineNumber) {
+        HyperlinkMock(final String filePath, final int lineNumber) {
             this.filePath = filePath;
             this.lineNumber = lineNumber;
         }
 
         @Override
-        public void navigate(Project project) {
+        public void navigate(final Project project) {
             // do nothing
         }
 
@@ -73,11 +73,11 @@ public class TICSOutputFilterTest {
         }
 
         @Override
-        public boolean equals(Object o) {
+        public boolean equals(final Object o) {
             if (this == o) return true;
             if (o == null || getClass() != o.getClass()) return false;
 
-            HyperlinkMock that = (HyperlinkMock) o;
+            final HyperlinkMock that = (HyperlinkMock) o;
 
             return lineNumber == that.lineNumber && filePath.equals(that.filePath);
         }
@@ -90,11 +90,11 @@ public class TICSOutputFilterTest {
         }
     }
 
-    private void assertEqualResults(Result expected, Result actual) {
+    private void assertEqualResults(final Result expected, final Result actual) {
         assertTrue(isEqualResults(expected, actual));
     }
 
-    private boolean isEqualResults(Result expected, Result actual) {
+    private boolean isEqualResults(final Result expected, final Result actual) {
         if (expected == null || actual == null) {
             return expected == actual;
         }
@@ -116,7 +116,7 @@ public class TICSOutputFilterTest {
         return true;
     }
 
-    private boolean isEqualResultItem(ResultItem expectedItem, ResultItem actualItem) {
+    private boolean isEqualResultItem(final ResultItem expectedItem, final ResultItem actualItem) {
         return expectedItem.getHighlightStartOffset() == actualItem.getHighlightStartOffset()
                 && expectedItem.getHighlightEndOffset() == actualItem.getHighlightEndOffset();
     }

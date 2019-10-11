@@ -17,18 +17,21 @@ import com.tiobe.plugins.intellij.console.TICSConsole;
 import com.tiobe.plugins.intellij.console.TICSOutputFilter;
 import com.tiobe.plugins.intellij.errors.ErrorMessages;
 
-import javax.swing.*;
+import javax.swing.JOptionPane;
 
 import static javax.swing.JOptionPane.ERROR_MESSAGE;
 
+/**
+ * {@link AnAction} that invokes TICS Client on a set of files or on a project.
+ */
 abstract class AbstractAnalyzeAction extends AnAction {
-    final static String TICS_COMMAND = "TICS";
-    final static String IDE_PARAMETER = "-ide";
-    final static String IDE_NAME = "intellij";
-    final static String PROJFILE_PARAMETER = "-projfile";
+    static final String TICS_COMMAND = "TICS";
+    static final String IDE_PARAMETER = "-ide";
+    static final String IDE_NAME = "intellij";
+    static final String PROJFILE_PARAMETER = "-projfile";
 
     @Override
-    public final void actionPerformed(AnActionEvent event) {
+    public final void actionPerformed(final AnActionEvent event) {
         final DataContext context = event.getDataContext();
         final VirtualFile file = DataKeys.VIRTUAL_FILE.getData(context);
         final Project project = DataKeys.PROJECT.getData(context);
@@ -48,7 +51,7 @@ abstract class AbstractAnalyzeAction extends AnAction {
         try {
             FileDocumentManager.getInstance().saveAllDocuments();
             handler = TICSAnalyzer.getInstance().run(getTICSCommand(file, project));
-        } catch (ExecutionException e) {
+        } catch (final ExecutionException e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(null,
                     ErrorMessages.getExecutionErrorMessage(TICS_COMMAND, e.getMessage()),
@@ -62,7 +65,7 @@ abstract class AbstractAnalyzeAction extends AnAction {
     }
 
     @Override
-    public final void update(AnActionEvent event) {
+    public final void update(final AnActionEvent event) {
         event.getPresentation().setEnabled(!TICSAnalyzer.getInstance().isRunning());
     }
 
@@ -71,7 +74,7 @@ abstract class AbstractAnalyzeAction extends AnAction {
     protected abstract boolean isFileRequired();
     protected abstract boolean isProjectRequired();
 
-    private String getName(VirtualFile file, Project project) {
+    private String getName(final VirtualFile file, final Project project) {
         if (file != null) {
             return file.getName();
         } else if (project != null) {

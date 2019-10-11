@@ -8,8 +8,8 @@ import com.intellij.execution.process.ProcessHandler;
 import com.intellij.execution.process.ProcessListener;
 import com.intellij.openapi.util.Key;
 
-public class TICSAnalyzer {
-    private final static TICSAnalyzer INSTANCE = new TICSAnalyzer();
+public final class TICSAnalyzer {
+    private static final TICSAnalyzer INSTANCE = new TICSAnalyzer();
 
     private ProcessHandler handler;
     private TICSProcessState state = TICSProcessState.STOPPED;
@@ -21,11 +21,11 @@ public class TICSAnalyzer {
     private TICSAnalyzer() {
     }
 
-    public ProcessHandler run(GeneralCommandLine command) throws ExecutionException {
+    public ProcessHandler run(final GeneralCommandLine command) throws ExecutionException {
         return run(command, false);
     }
 
-    public ProcessHandler run(GeneralCommandLine command, boolean ignoreState)
+    public ProcessHandler run(final GeneralCommandLine command, final boolean ignoreState)
             throws ExecutionException {
         final ProcessHandler handler = new OSProcessHandler(command);
         final ProcessListener listener = new TICSProcessListener();
@@ -40,17 +40,17 @@ public class TICSAnalyzer {
     @SuppressWarnings("NullableProblems")
     private class TICSProcessListener implements ProcessListener {
         @Override
-        public void startNotified(ProcessEvent processEvent) {
+        public void startNotified(final ProcessEvent processEvent) {
             state = TICSProcessState.RUNNING;
         }
 
         @Override
-        public void processTerminated(ProcessEvent processEvent) {
+        public void processTerminated(final ProcessEvent processEvent) {
             state = TICSProcessState.STOPPED;
         }
 
         @Override
-        public void processWillTerminate(ProcessEvent processEvent, boolean willBeDestroyed) {
+        public void processWillTerminate(final ProcessEvent processEvent, final boolean willBeDestroyed) {
             if (willBeDestroyed) {
                 state = TICSProcessState.STOPPING;
             }
@@ -58,7 +58,7 @@ public class TICSAnalyzer {
 
         @Override
         @SuppressWarnings("rawtypes")
-        public void onTextAvailable(ProcessEvent processEvent, Key key) {
+        public void onTextAvailable(final ProcessEvent processEvent, final Key key) {
         }
     }
 

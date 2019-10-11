@@ -10,10 +10,10 @@ import java.io.OutputStream;
 
 @SuppressWarnings({"ConstantConditions", "NullableProblems"})
 public class MockVirtualFile extends VirtualFile {
-    final private String name;
-    final private String path;
+    private final String name;
+    private final String path;
 
-    public MockVirtualFile(String path) {
+    public MockVirtualFile(final String path) {
         final String[] splitPath = path.split("[/\\\\]");
         this.name = splitPath[splitPath.length - 1];
         this.path = path;
@@ -60,7 +60,7 @@ public class MockVirtualFile extends VirtualFile {
     }
 
     @Override
-    public OutputStream getOutputStream(Object requestor, long newModificationStamp, long newTimeStamp) throws IOException {
+    public OutputStream getOutputStream(final Object requestor, final long newModificationStamp, final long newTimeStamp) throws IOException {
         return null;
     }
 
@@ -80,7 +80,7 @@ public class MockVirtualFile extends VirtualFile {
     }
 
     @Override
-    public void refresh(boolean asynchronous, boolean recursive, @Nullable Runnable postRunnable) {
+    public void refresh(final boolean asynchronous, final boolean recursive, @Nullable final Runnable postRunnable) {
 
     }
 

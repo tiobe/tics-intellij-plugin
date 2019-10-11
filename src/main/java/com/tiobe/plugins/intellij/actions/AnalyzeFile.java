@@ -5,8 +5,8 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
 
 public class AnalyzeFile extends AbstractAnalyzeAction {
-    public GeneralCommandLine getTICSCommand(VirtualFile file, Project project) {
-        GeneralCommandLine cmd = new GeneralCommandLine(TICS_COMMAND);
+    public GeneralCommandLine getTICSCommand(final VirtualFile file, final Project project) {
+        final GeneralCommandLine cmd = new GeneralCommandLine(TICS_COMMAND);
         cmd.addParameters(IDE_PARAMETER, IDE_NAME);
         final VirtualFile projectFile = project == null ? null : project.getProjectFile();
         if (projectFile != null) {

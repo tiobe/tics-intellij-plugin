@@ -3,7 +3,7 @@
 .SILENT:
 .SUFFIXES:
 
-.PHONY: all clean build runide test coveragereport rebuild package relnotes clean_relnotes publish
+.PHONY: all check clean build runide test coveragereport rebuild package relnotes clean_relnotes publish
 
 DAEMON := --no-daemon # to prevent using the Gradle Daemon in CI
 GRADLE := $(CURDIR)/gradlew -PSVNVERSION="$(SVNVERSION)" $(DAEMON)
@@ -15,13 +15,16 @@ all: build coveragereport
 build:
 	$(GRADLE) buildplugin
 
+check:
+	$(GRADLE) check -x test
+
 clean: clean_relnotes
 	$(GRADLE) clean
 
 runide:
 	$(GRADLE) runide
 
-test:
+test: check
 	$(GRADLE) test
 
 coveragereport:

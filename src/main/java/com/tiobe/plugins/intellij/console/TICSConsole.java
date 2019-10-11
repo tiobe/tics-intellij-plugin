@@ -8,14 +8,14 @@ import com.intellij.execution.ui.RunContentDescriptor;
 import com.intellij.openapi.project.Project;
 import com.intellij.execution.filters.Filter;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.JPanel;
+import java.awt.BorderLayout;
 
 public class TICSConsole {
-    public static ConsoleView openConsole(Project project, String name, Filter... filters) {
+    public static ConsoleView openConsole(final Project project, final String name, final Filter... filters) {
         final ConsoleView consoleView =
                 TextConsoleBuilderFactory.getInstance().createBuilder(project).getConsole();
-        for (Filter filter : filters) {
+        for (final Filter filter : filters) {
             consoleView.addMessageFilter(filter);
         }
 

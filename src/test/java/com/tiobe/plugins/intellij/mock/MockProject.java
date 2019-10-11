@@ -16,7 +16,7 @@ public class MockProject implements Project {
     private final String name;
     private final String path;
 
-    public MockProject(String name, String path) {
+    public MockProject(final String name, final String path) {
         this.name = name;
         this.path = path;
     }
@@ -84,29 +84,29 @@ public class MockProject implements Project {
     }
 
     @Override
-    public BaseComponent getComponent(@NotNull String name) {
+    public BaseComponent getComponent(@NotNull final String name) {
         return null;
     }
 
     @Override
-    public <T> T getComponent(@NotNull Class<T> interfaceClass) {
+    public <T> T getComponent(@NotNull final Class<T> interfaceClass) {
         return null;
     }
 
     @Override
-    public <T> T getComponent(@NotNull Class<T> interfaceClass, T defaultImplementationIfAbsent) {
+    public <T> T getComponent(@NotNull final Class<T> interfaceClass, final T defaultImplementationIfAbsent) {
         return null;
     }
 
     @Override
-    public boolean hasComponent(@NotNull Class interfaceClass) {
+    public boolean hasComponent(@NotNull final Class interfaceClass) {
         return false;
     }
 
     @SuppressWarnings("ConstantConditions")
     @NotNull
     @Override
-    public <T> T[] getComponents(@NotNull Class<T> baseClass) {
+    public <T> T[] getComponents(@NotNull final Class<T> baseClass) {
         return null;
     }
 
@@ -132,7 +132,7 @@ public class MockProject implements Project {
     @SuppressWarnings("ConstantConditions")
     @NotNull
     @Override
-    public <T> T[] getExtensions(@NotNull ExtensionPointName<T> extensionPointName) {
+    public <T> T[] getExtensions(@NotNull final ExtensionPointName<T> extensionPointName) {
         return null;
     }
 
@@ -150,12 +150,12 @@ public class MockProject implements Project {
 
     @Nullable
     @Override
-    public <T> T getUserData(@NotNull Key<T> key) {
+    public <T> T getUserData(@NotNull final Key<T> key) {
         return null;
     }
 
     @Override
-    public <T> void putUserData(@NotNull Key<T> key, @Nullable T value) {
+    public <T> void putUserData(@NotNull final Key<T> key, @Nullable final T value) {
 
     }
 }

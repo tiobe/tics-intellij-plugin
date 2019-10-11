@@ -23,6 +23,7 @@ repositories {
 }
 
 apply plugin: 'org.jetbrains.intellij'
+apply plugin: 'checkstyle'
 apply plugin: 'jacoco'
 
 jacocoTestReport {

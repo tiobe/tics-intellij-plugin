@@ -12,14 +12,14 @@ import static org.junit.Assert.assertEquals;
 
 @RunWith(Parameterized.class)
 public class ErrorMessagesTest {
-    final static private String TICS = "TICS";
-    final static private String TICSQSERVER = "TICSQServer";
-    final static private String TICSCONFIG = "TICSConfig";
-    final static private String ERROR = "An error occurred.";
+    private static final String TICS = "TICS";
+    private static final String TICSQSERVER = "TICSQServer";
+    private static final String TICSCONFIG = "TICSConfig";
+    private static final String ERROR = "An error occurred.";
 
-    final private String command;
+    private final String command;
 
-    public ErrorMessagesTest(String command) {
+    public ErrorMessagesTest(final String command) {
         this.command = command;
     }
 

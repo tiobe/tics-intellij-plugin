@@ -21,7 +21,7 @@ public class AnalyzeProjectTest {
     private final GeneralCommandLine expected;
     private AnalyzeProject instance;
 
-    public AnalyzeProjectTest(VirtualFile file, Project project, GeneralCommandLine expected) {
+    public AnalyzeProjectTest(final VirtualFile file, final Project project, final GeneralCommandLine expected) {
         this.file = file;
         this.project = project;
         this.expected = expected;
