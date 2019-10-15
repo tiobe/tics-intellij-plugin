@@ -52,7 +52,7 @@ clean_relnotes:
 	rm -f $(TOOL)-relnotes.html
 
 TICSVERSION=$(shell cat ../../make/TICSVERSION)
-DEST=imposter:/var/home/wilde/ticsweb/pub/plugins/intellij
+DEST=absolem:/home/wilde/ticsweb/pub/plugins/intellij
 
 publish: package relnotes
 	scp build/distributions/TICSIntelliJ.zip $(DEST)/$(TOOL)-$(TICSVERSION).$(SVNVERSION).zip
