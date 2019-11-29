@@ -14,7 +14,7 @@ patchPluginXml {
     ext.SVNVERSION = '?'
   }
   sinceBuild = '172.4155'
-  untilBuild = '192.*'
+  untilBuild = '193.*'
   version "${new File('../../make/TICSVERSION').text.trim()}.${SVNVERSION}"
 }
 
