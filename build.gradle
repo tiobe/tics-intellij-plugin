@@ -1,25 +1,38 @@
 plugins {
-  id "org.jetbrains.intellij" version "0.4.9"
+    id "org.jetbrains.intellij" version "0.4.9"
 }
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 intellij {
-  version '2018.1.8'
+    version '2018.1.8'
+
+    // Specifying these custom repositories enables us to cache them within TIOBE.
+    // If this causes trouble, either make sure you are in the TIOBE network, or
+    // comment out these lines temporarily.
+    intellijRepo 'http://artifacts.tiobe.com/repository/maven/'
+    pluginsRepo 'http://artifacts.tiobe.com/repository/maven/'
+    jreRepo 'http://artifacts.tiobe.com/repository/intellij-jdk/'
 }
 
 patchPluginXml {
-  if (!project.hasProperty('SVNVERSION')) {
-    ext.SVNVERSION = '?'
-  }
-  sinceBuild = '172.4155'
-  untilBuild = '201.*'
-  version "${new File('../../make/TICSVERSION').text.trim()}.${SVNVERSION}"
+    if (!project.hasProperty('SVNVERSION')) {
+        ext.SVNVERSION = '?'
+    }
+    sinceBuild = '172.4155'
+    untilBuild = '201.*'
+    version "${new File('../../make/TICSVERSION').text.trim()}.${SVNVERSION}"
 }
 
 repositories {
-    mavenCentral()
+    // Specifying this custom repository enables us to cache external libraries within TIOBE.
+    // If this causes trouble, either make sure you are in the TIOBE network, or
+    // add the repository mavenCentral().
+    maven {
+        url 'http://artifacts.tiobe.com/repository/maven/'
+    }
+    //mavenCentral()
 }
 
 apply plugin: 'org.jetbrains.intellij'
@@ -31,3 +44,13 @@ jacocoTestReport {
         xml.enabled true
     }
 }
+
+task configureWrapper {
+    // Make sure that when upgrading the Gradle wrapper, we still use the local
+    // TIOBE mirror.
+    doLast { 
+        wrapper.distributionUrl = "https://artifacts.tiobe.com/repository/gradle-distributions/gradle-${wrapper.gradleVersion}-bin.zip"
+    } 
+}   
+
+wrapper.dependsOn configureWrapper
