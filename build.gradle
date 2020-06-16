@@ -11,9 +11,9 @@ intellij {
     // Specifying these custom repositories enables us to cache them within TIOBE.
     // If this causes trouble, either make sure you are in the TIOBE network, or
     // comment out these lines temporarily.
-    intellijRepo 'http://artifacts.tiobe.com/repository/maven/'
-    pluginsRepo 'http://artifacts.tiobe.com/repository/maven/'
-    jreRepo 'http://artifacts.tiobe.com/repository/intellij-jdk/'
+    intellijRepo 'https://artifacts.tiobe.com/repository/maven/'
+    pluginsRepo 'https://artifacts.tiobe.com/repository/maven/'
+    jreRepo 'https://artifacts.tiobe.com/repository/intellij-jdk/'
 }
 
 patchPluginXml {
@@ -30,7 +30,7 @@ repositories {
     // If this causes trouble, either make sure you are in the TIOBE network, or
     // add the repository mavenCentral().
     maven {
-        url 'http://artifacts.tiobe.com/repository/maven/'
+        url 'https://artifacts.tiobe.com/repository/maven/'
     }
     //mavenCentral()
 }
