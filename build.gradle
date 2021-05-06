@@ -1,5 +1,5 @@
 plugins {
-    id "org.jetbrains.intellij" version "0.4.9"
+    id "org.jetbrains.intellij" version "0.7.3"
 }
 
 sourceCompatibility = 1.8
@@ -12,8 +12,10 @@ intellij {
     // If this causes trouble, either make sure you are in the TIOBE network, or
     // comment out these lines temporarily.
     intellijRepo 'https://artifacts.tiobe.com/repository/maven/'
-    pluginsRepo 'https://artifacts.tiobe.com/repository/maven/'
     jreRepo 'https://artifacts.tiobe.com/repository/intellij-jdk/'
+    pluginsRepo {
+        maven('https://artifacts.tiobe.com/repository/maven/')
+    }
 }
 
 patchPluginXml {
