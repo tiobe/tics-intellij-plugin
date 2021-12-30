@@ -1,19 +1,20 @@
 plugins {
-    id "org.jetbrains.intellij" version "0.7.3"
+    id "org.jetbrains.intellij" version "1.3.0"
 }
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 intellij {
-    version '2018.1.8'
+    version.set('2018.1.8')
+    instrumentCode.set(false) // can be removed when targeting IntelliJ 2018.3+
 
     // Specifying these custom repositories enables us to cache them within TIOBE.
     // If this causes trouble, either make sure you are in the TIOBE network, or
     // comment out these lines temporarily.
-    intellijRepo 'https://artifacts.tiobe.com/repository/maven/'
-    jreRepo 'https://artifacts.tiobe.com/repository/intellij-jdk/'
-    pluginsRepo {
+    intellijRepository.set('https://artifacts.tiobe.com/repository/maven/')
+    jreRepository.set('https://artifacts.tiobe.com/repository/intellij-jdk/')
+    pluginsRepositories {
         maven('https://artifacts.tiobe.com/repository/maven/')
     }
 }
@@ -43,7 +44,7 @@ apply plugin: 'jacoco'
 
 jacocoTestReport {
     reports {
-        xml.enabled true
+        xml.required.set(true)
     }
 }
 
