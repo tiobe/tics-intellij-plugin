@@ -14,6 +14,7 @@ all: build coveragereport
 
 build:
 	$(GRADLE) buildplugin
+	cp build/distributions/$(TOOL)-$(TICSVERSION).$(SVNVERSION).zip build/distributions/TICSIntelliJ.zip
 
 check:
 	$(GRADLE) check -x test
@@ -55,5 +56,5 @@ TICSVERSION=$(shell cat ../../make/TICSVERSION)
 DEST=absolem:/home/wilde/ticsweb/pub/plugins/intellij
 
 publish: package relnotes
-	scp build/distributions/TICSIntelliJ.zip $(DEST)/$(TOOL)-$(TICSVERSION).$(SVNVERSION).zip
+	scp build/distributions/$(TOOL)-$(TICSVERSION).$(SVNVERSION).zip $(DEST)
 	scp $(TOOL)-relnotes.html $(DEST)
