@@ -5,9 +5,9 @@
 
 .PHONY: all check clean build runide test coveragereport rebuild package relnotes clean_relnotes publish
 
-DAEMON := --no-daemon # to prevent using the Gradle Daemon in CI
-GRADLE := $(CURDIR)/gradlew -PSVNVERSION="$(SVNVERSION)" $(DAEMON)
 SVNVERSION := $(shell svn info . | sed -n "s/Last Changed Rev: //p")
+DAEMON := --no-daemon # to prevent using the Gradle Daemon in CI
+GRADLE = $(CURDIR)/gradlew -PSVNVERSION="$(SVNVERSION)" $(DAEMON)
 TOOL := TICSIntelliJ
 
 all: build coveragereport
