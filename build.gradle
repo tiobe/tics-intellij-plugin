@@ -1,5 +1,5 @@
 plugins {
-    id "org.jetbrains.intellij" version "1.5.2"
+    id "org.jetbrains.intellij" version "1.12.0"
 }
 
 sourceCompatibility = 1.8
@@ -24,7 +24,7 @@ patchPluginXml {
         ext.SVNVERSION = '?'
     }
     sinceBuild = '172.4155'
-    untilBuild = '221.*'
+    untilBuild = '223.*'
     version "${new File('../../make/TICSVERSION').text.trim()}.${SVNVERSION}"
 }
 
