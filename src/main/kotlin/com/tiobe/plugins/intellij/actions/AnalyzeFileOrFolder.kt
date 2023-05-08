@@ -8,10 +8,10 @@ class AnalyzeFileOrFolder : AnalyzeFile() {
     override fun update(e: AnActionEvent) {
         PlatformDataKeys.VIRTUAL_FILE.getData(e.dataContext)?.let {
             if (it.isDirectory) {
-                e.presentation.text = "Analyze Folder"
+                e.presentation.text = "Analyze Folder with TICS"
                 e.presentation.icon = TicsIcons.ANALYZE_FOLDER
             } else {
-                e.presentation.text = "Analyze File"
+                e.presentation.text = "Analyze File with TICS"
                 e.presentation.icon = TicsIcons.ANALYZE_FILE
             }
         }

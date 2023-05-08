@@ -31,11 +31,11 @@
     <actions>
         <group id="TICS">
             <action id="TICS.AnalyzeFile" class="com.tiobe.plugins.intellij.actions.AnalyzeFile"
-                    icon="com.tiobe.plugins.intellij.icons.TicsIcons.ANALYZE_FILE" text="Analyze File"/>
+                    icon="com.tiobe.plugins.intellij.icons.TicsIcons.ANALYZE_FILE" text="Analyze File with TICS"/>
             <action id="TICS.AnalyzeProject" class="com.tiobe.plugins.intellij.actions.AnalyzeProject"
-                    icon="com.tiobe.plugins.intellij.icons.TicsIcons.ANALYZE_FOLDER" text="Analyze Project"/>
+                    icon="com.tiobe.plugins.intellij.icons.TicsIcons.ANALYZE_FOLDER" text="Analyze Project with TICS"/>
             <action id="TICS.CancelAnalysis" class="com.tiobe.plugins.intellij.actions.CancelAnalysis"
-                    icon="com.tiobe.plugins.intellij.icons.TicsIcons.CANCEL_TICS" text="Cancel Analysis"/>
+                    icon="com.tiobe.plugins.intellij.icons.TicsIcons.CANCEL_TICS" text="Cancel TICS Analysis"/>
             <action id="TICS.RunTicsConfig" class="com.tiobe.plugins.intellij.actions.RunTicsConfig"
                     icon="com.tiobe.plugins.intellij.icons.TicsIcons.CONFIGURE_TICS" text="TICS Configuration">
             </action>
@@ -56,10 +56,12 @@
         </group>
 
         <group>
+            <separator/>
             <action id="TICS.AnalyzeFileOrFolder" class="com.tiobe.plugins.intellij.actions.AnalyzeFileOrFolder"/>
             <reference id="TICS.CancelAnalysis"/>
-            <add-to-group group-id="EditorPopupMenu"/>
-            <add-to-group group-id="ProjectViewPopupMenu"/>
+            <separator/>
+            <add-to-group group-id="EditorPopupMenu" anchor="last"/>
+            <add-to-group group-id="ProjectViewPopupMenu" anchor="last"/>
         </group>
     </actions>
 </idea-plugin>
