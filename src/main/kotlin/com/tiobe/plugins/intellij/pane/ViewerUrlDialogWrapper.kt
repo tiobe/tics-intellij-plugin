@@ -51,7 +51,7 @@ class ViewerUrlDialogWrapper : DialogWrapper(true) {
     }
 
     override fun doOKAction() {
-        val validAuthTokenInfo = TicsAuthToken.getInstance().validateAndGet(jTextField.text)
+        val validAuthTokenInfo = TicsAuthToken.validateAndGet(jTextField.text)
         when (validAuthTokenInfo.code) {
             200 -> {
                 input = jTextField.text

@@ -10,19 +10,8 @@ import org.apache.hc.core5.http.io.entity.EntityUtils
 import java.io.FileNotFoundException
 import java.io.FileReader
 
-class TicsAuthToken private constructor() {
-
-    companion object {
-        private var instance: TicsAuthToken? = null
-        private var authToken: String? = null
-
-        fun getInstance(): TicsAuthToken {
-
-            return instance ?: synchronized(this) {
-                instance ?: TicsAuthToken().also { instance = it }
-            }
-        }
-    }
+object TicsAuthToken {
+    private var authToken: String? = null
 
     fun getAuthToken(): String? {
         return when (authToken) {

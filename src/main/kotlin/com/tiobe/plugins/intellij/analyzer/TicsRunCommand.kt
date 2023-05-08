@@ -15,20 +15,9 @@ enum class TicsProcessState {
     STOPPING
 }
 
-class TicsRunCommand private constructor() {
+object TicsRunCommand {
     private var handler: ProcessHandler? = null
     private var state: TicsProcessState = TicsProcessState.STOPPED
-
-    companion object {
-        @Volatile
-        private var instance: TicsRunCommand? = null
-
-        fun getInstance(): TicsRunCommand {
-            return instance ?: synchronized(this) {
-                instance ?: TicsRunCommand().also { instance = it }
-            }
-        }
-    }
 
     @Throws(ExecutionException::class)
     fun run(
@@ -45,17 +34,16 @@ class TicsRunCommand private constructor() {
         }
         return handler
     }
-
-    @SuppressWarnings("NullableProblems")
+    
     private class TicsProcessListener(callback: ((code: Int) -> Unit)?) : ProcessListener {
         private val callbackFunction = callback
 
         override fun startNotified(event: ProcessEvent) {
-            instance?.state = TicsProcessState.RUNNING
+            state = TicsProcessState.RUNNING
         }
 
         override fun processTerminated(event: ProcessEvent) {
-            instance?.state = TicsProcessState.STOPPED
+            state = TicsProcessState.STOPPED
             ApplicationManager.getApplication().invokeLater {
                 callbackFunction?.let { it(event.exitCode) }
             }
@@ -63,7 +51,7 @@ class TicsRunCommand private constructor() {
 
         override fun processWillTerminate(event: ProcessEvent, willBeDestroyed: Boolean) {
             if (willBeDestroyed) {
-                instance?.state = TicsProcessState.STOPPING
+                state = TicsProcessState.STOPPING
             }
         }
 

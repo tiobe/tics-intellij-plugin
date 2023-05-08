@@ -22,19 +22,22 @@
     <!-- Extension points defined by the plugin.
          Read more: https://plugins.jetbrains.com/docs/intellij/plugin-extension-points.html -->
     <extensions defaultExtensionNs="com.intellij">
-        <annotator language="" implementationClass="com.tiobe.plugins.intellij.analyzer.TicsProblemReporter"/>
+        <!--        <annotator language="" implementationClass="com.tiobe.plugins.intellij.analyzer.TicsProblemReporter"/>-->
+        <toolWindow id="TICS" factoryClass="com.tiobe.plugins.intellij.ui.TicsToolWindowFactory"
+                    icon="com.tiobe.plugins.intellij.icons.TicsIcons.TICS_LOGO"
+                    anchor="bottom" canCloseContents="true"/>
     </extensions>
 
     <actions>
         <group id="TICS">
             <action id="TICS.AnalyzeFile" class="com.tiobe.plugins.intellij.actions.AnalyzeFile"
-                    icon="/icons/TI_analyze_file.png" text="Analyze File"/>
+                    icon="com.tiobe.plugins.intellij.icons.TicsIcons.ANALYZE_FILE" text="Analyze File"/>
             <action id="TICS.AnalyzeProject" class="com.tiobe.plugins.intellij.actions.AnalyzeProject"
-                    icon="/icons/TI_analyze_project.png" text="Analyze Project"/>
+                    icon="com.tiobe.plugins.intellij.icons.TicsIcons.ANALYZE_FOLDER" text="Analyze Project"/>
             <action id="TICS.CancelAnalysis" class="com.tiobe.plugins.intellij.actions.CancelAnalysis"
-                    icon="/icons/TI_cancel_analysis.png" text="Cancel Analysis"/>
+                    icon="com.tiobe.plugins.intellij.icons.TicsIcons.CANCEL_TICS" text="Cancel Analysis"/>
             <action id="TICS.RunTicsConfig" class="com.tiobe.plugins.intellij.actions.RunTicsConfig"
-                    icon="/icons/TI_configuration.png" text="TICS Configuration">
+                    icon="com.tiobe.plugins.intellij.icons.TicsIcons.CONFIGURE_TICS" text="TICS Configuration">
             </action>
         </group>
 
@@ -48,12 +51,12 @@
         <group text="TICS" popup="true">
             <reference id="TICS"/>
             <action id="TICS.InstallTics" class="com.tiobe.plugins.intellij.actions.InstallTics"
-                    icon="/icons/TI_install.png" text="Instal TICS"/>
+                    icon="AllIcons.Actions.Install" text="Install TICS"/>
             <add-to-group group-id="ToolsMenu"/>
         </group>
 
         <group>
-            <reference id="TICS.AnalyzeFile"/>
+            <action id="TICS.AnalyzeFileOrFolder" class="com.tiobe.plugins.intellij.actions.AnalyzeFileOrFolder"/>
             <reference id="TICS.CancelAnalysis"/>
             <add-to-group group-id="EditorPopupMenu"/>
             <add-to-group group-id="ProjectViewPopupMenu"/>

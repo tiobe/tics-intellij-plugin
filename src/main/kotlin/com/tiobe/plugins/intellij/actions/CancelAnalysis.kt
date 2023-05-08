@@ -7,12 +7,12 @@ import com.tiobe.plugins.intellij.analyzer.TicsRunCommand
 
 class CancelAnalysis : AnAction() {
     override fun actionPerformed(e: AnActionEvent) {
-        TicsRunCommand.getInstance().stop()
+        TicsRunCommand.stop()
     }
 
     override fun update(e: AnActionEvent) {
         e.presentation.isVisible =
-            TicsRunCommand.getInstance().isRunning() && !TicsRunCommand.getInstance().isStopping()
+            TicsRunCommand.isRunning() && !TicsRunCommand.isStopping()
     }
 
     override fun getActionUpdateThread(): ActionUpdateThread {

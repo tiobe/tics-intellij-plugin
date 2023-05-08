@@ -3,9 +3,7 @@ package com.tiobe.plugins.intellij.actions
 import com.google.gson.Gson
 import com.intellij.execution.ExecutionException
 import com.intellij.execution.configurations.GeneralCommandLine
-import com.intellij.execution.filters.Filter
 import com.intellij.execution.process.ProcessHandler
-import com.intellij.execution.ui.ConsoleView
 import com.intellij.icons.AllIcons
 import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
@@ -18,7 +16,6 @@ import com.intellij.openapi.util.SystemInfo
 import com.tiobe.model.AlertMessages
 import com.tiobe.plugins.intellij.analyzer.TicsRunCommand
 import com.tiobe.plugins.intellij.console.TicsConsole
-import com.tiobe.plugins.intellij.console.TicsOutputFilter
 import com.tiobe.plugins.intellij.errors.ErrorMessages
 import com.tiobe.plugins.intellij.pane.TicsOptionPane
 import com.tiobe.plugins.intellij.pane.ViewerUrlDialogWrapper
@@ -63,7 +60,7 @@ class InstallTics : AnAction() {
 
         val handler: ProcessHandler
         try {
-            handler = TicsRunCommand.getInstance().run(command, callback = ::onHandlerTerminated)
+            handler = TicsRunCommand.run(command, callback = ::onHandlerTerminated)
         } catch (e: ExecutionException) {
             e.printStackTrace()
             TicsOptionPane.showErrorMessageDialog(
@@ -71,12 +68,7 @@ class InstallTics : AnAction() {
             )
             return
         }
-
-        if (project != null) {
-            val outputFilter: Filter = TicsOutputFilter(project)
-            val consoleView: ConsoleView = TicsConsole.openConsole(project, "TICS install", outputFilter)
-            consoleView.attachToProcess(handler)
-        }
+        TicsConsole.attachToProcess(handler)
     }
 
     /**
@@ -109,11 +101,11 @@ class InstallTics : AnAction() {
     private fun getInstallCommand(url: String): GeneralCommandLine {
         try {
             if (SystemInfo.isLinux) {
-                val installUrl = getInstallUrl("linux", url, TicsAuthToken.getInstance().getAuthToken())
+                val installUrl = getInstallUrl("linux", url, TicsAuthToken.getAuthToken())
                 return GeneralCommandLine(listOf("env TICSIDE='INTELLIJ' bash", "-c", getLinuxInstall(installUrl)))
             } else if (SystemInfo.isWindows) {
                 val installUrl =
-                    getInstallUrl("windows", url, TicsAuthToken.getInstance().getAuthToken())
+                    getInstallUrl("windows", url, TicsAuthToken.getAuthToken())
                 return GeneralCommandLine(listOf("powershell", getWindowsInstall(installUrl)))
             }
             throw Exception("No install command found for platform: ${SystemInfo.OS_NAME}.")

@@ -15,7 +15,7 @@ class RunTicsConfig : AnAction() {
 
     override fun actionPerformed(e: AnActionEvent) {
         try {
-            TicsRunCommand.getInstance().run(TICSCONFIG_COMMAND, true)
+            TicsRunCommand.run(TICSCONFIG_COMMAND, true)
         } catch (e: ExecutionException) {
             e.printStackTrace()
             showErrorMessageDialog(

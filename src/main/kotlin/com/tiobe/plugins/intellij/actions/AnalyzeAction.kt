@@ -2,16 +2,13 @@ package com.tiobe.plugins.intellij.actions
 
 import com.intellij.execution.ExecutionException
 import com.intellij.execution.configurations.GeneralCommandLine
-import com.intellij.execution.filters.Filter
 import com.intellij.execution.process.ProcessHandler
-import com.intellij.execution.ui.ConsoleView
 import com.intellij.openapi.actionSystem.*
 import com.intellij.openapi.fileEditor.FileDocumentManager
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.vfs.VirtualFile
 import com.tiobe.plugins.intellij.analyzer.TicsRunCommand
 import com.tiobe.plugins.intellij.console.TicsConsole
-import com.tiobe.plugins.intellij.console.TicsOutputFilter
 import com.tiobe.plugins.intellij.errors.ErrorMessages
 import com.tiobe.plugins.intellij.pane.TicsOptionPane.Companion.showErrorMessageDialog
 
@@ -44,7 +41,7 @@ abstract class AnalyzeAction : AnAction() {
         val handler: ProcessHandler
         try {
             FileDocumentManager.getInstance().saveAllDocuments()
-            handler = TicsRunCommand.getInstance().run(getTicsCommand(file, project))
+            handler = TicsRunCommand.run(getTicsCommand(file, project))
         } catch (e: ExecutionException) {
             e.printStackTrace()
             showErrorMessageDialog(
@@ -52,20 +49,15 @@ abstract class AnalyzeAction : AnAction() {
             )
             return
         }
-
-        val name: String = getName(file, project)
-        if (project != null) {
-            val outputFilter: Filter = TicsOutputFilter(project)
-            val consoleView: ConsoleView =
-                TicsConsole.openConsole(project, String.format("TICS (%s)", name), outputFilter)
-            consoleView.attachToProcess(handler)
+        val firstLine: String? = file?.let {
+            "Running analysis for ${it.name}"
         }
-
+        TicsConsole.attachToProcess(handler, firstLine)
     }
 
     override fun update(e: AnActionEvent) {
         e.presentation.isVisible =
-            !TicsRunCommand.getInstance().isRunning() && !TicsRunCommand.getInstance().isStopping()
+            !TicsRunCommand.isRunning() && !TicsRunCommand.isStopping()
     }
 
     protected abstract fun getTicsCommand(file: VirtualFile?, project: Project?): GeneralCommandLine
@@ -73,10 +65,6 @@ abstract class AnalyzeAction : AnAction() {
     protected abstract fun isFileRequired(): Boolean
 
     protected abstract fun isProjectRequired(): Boolean
-
-    private fun getName(file: VirtualFile?, project: Project?): String {
-        return file?.name ?: (project?.name ?: "unknown")
-    }
 
     override fun getActionUpdateThread(): ActionUpdateThread {
         return ActionUpdateThread.BGT
