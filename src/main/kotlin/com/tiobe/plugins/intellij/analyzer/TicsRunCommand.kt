@@ -34,7 +34,7 @@ object TicsRunCommand {
         }
         return handler
     }
-    
+
     private class TicsProcessListener(callback: ((code: Int) -> Unit)?) : ProcessListener {
         private val callbackFunction = callback
 
@@ -55,7 +55,9 @@ object TicsRunCommand {
             }
         }
 
-        override fun onTextAvailable(event: ProcessEvent, outputType: Key<*>) {}
+        override fun onTextAvailable(event: ProcessEvent, outputType: Key<*>) {
+            /* nothing needed here */
+        }
 
     }
 

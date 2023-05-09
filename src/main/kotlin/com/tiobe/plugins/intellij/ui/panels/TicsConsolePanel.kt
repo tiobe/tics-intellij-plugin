@@ -1,4 +1,4 @@
-package com.tiobe.plugins.intellij.ui
+package com.tiobe.plugins.intellij.ui.panels
 
 import com.intellij.openapi.project.Project
 import com.intellij.tools.SimpleActionGroup
@@ -7,7 +7,7 @@ import com.tiobe.plugins.intellij.utilities.TicsActions
 
 class TicsConsolePanel(project: Project) : AbstractPanel(project) {
     init {
-        addLogger()
+        addConsole()
     }
 
     override fun createActionGroup(): SimpleActionGroup {
@@ -16,7 +16,7 @@ class TicsConsolePanel(project: Project) : AbstractPanel(project) {
         return actionGroup
     }
 
-    private fun addLogger() {
+    private fun addConsole() {
         val consoleView = TicsConsole.setConsoleView(project)
         super.setContent(consoleView.component)
     }

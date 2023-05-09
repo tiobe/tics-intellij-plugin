@@ -63,5 +63,8 @@
             <add-to-group group-id="EditorPopupMenu" anchor="last"/>
             <add-to-group group-id="ProjectViewPopupMenu" anchor="last"/>
         </group>
+
+        <action id="TICS.ClearConsole" icon="AllIcons.Actions.GC"
+                class="com.tiobe.plugins.intellij.actions.ClearConsole" text="Clear TICS Console"/>
     </actions>
 </idea-plugin>

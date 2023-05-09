@@ -1,4 +1,4 @@
-package com.tiobe.plugins.intellij.ui
+package com.tiobe.plugins.intellij.ui.panels
 
 import com.intellij.openapi.project.Project
 import javax.swing.JLabel

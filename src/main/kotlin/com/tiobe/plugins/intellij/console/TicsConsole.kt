@@ -18,9 +18,17 @@ object TicsConsole {
         if (this::consoleView.isInitialized) {
             consoleView.clear()
             firstLine?.let {
-                consoleView.print(firstLine, ConsoleViewContentType.SYSTEM_OUTPUT)
+                consoleView.print("$firstLine\n", ConsoleViewContentType.SYSTEM_OUTPUT)
             }
             consoleView.attachToProcess(handler)
+        } else {
+            throw Error("Console has not been registered yet.")
+        }
+    }
+
+    fun clear() {
+        if (this::consoleView.isInitialized) {
+            consoleView.clear()
         } else {
             throw Error("Console has not been registered yet.")
         }
