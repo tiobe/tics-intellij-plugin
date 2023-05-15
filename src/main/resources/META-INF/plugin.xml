@@ -22,7 +22,6 @@
     <!-- Extension points defined by the plugin.
          Read more: https://plugins.jetbrains.com/docs/intellij/plugin-extension-points.html -->
     <extensions defaultExtensionNs="com.intellij">
-        <!--        <annotator language="" implementationClass="com.tiobe.plugins.intellij.analyzer.TicsProblemReporter"/>-->
         <toolWindow id="TICS" factoryClass="com.tiobe.plugins.intellij.ui.TicsToolWindowFactory"
                     icon="com.tiobe.plugins.intellij.icons.TicsIcons.TICS_LOGO"
                     anchor="bottom" canCloseContents="true"/>

@@ -1,1 +1,1 @@
-rootProject.name = "tics-intellij"
+rootProject.name = "tics-intellij-plugin"

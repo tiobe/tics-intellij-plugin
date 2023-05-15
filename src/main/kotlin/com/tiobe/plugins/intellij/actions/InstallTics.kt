@@ -7,14 +7,11 @@ import com.intellij.execution.process.ProcessHandler
 import com.intellij.icons.AllIcons
 import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
-import com.intellij.openapi.actionSystem.DataContext
-import com.intellij.openapi.actionSystem.PlatformDataKeys
 import com.intellij.openapi.application.ApplicationManager
-import com.intellij.openapi.project.Project
 import com.intellij.openapi.ui.showOkCancelDialog
 import com.intellij.openapi.util.SystemInfo
 import com.tiobe.model.AlertMessages
-import com.tiobe.plugins.intellij.analyzer.TicsRunCommand
+import com.tiobe.plugins.intellij.analyzer.RunCommand
 import com.tiobe.plugins.intellij.console.TicsConsole
 import com.tiobe.plugins.intellij.errors.ErrorMessages
 import com.tiobe.plugins.intellij.pane.TicsOptionPane
@@ -41,7 +38,7 @@ class InstallTics : AnAction() {
                 }
             }
             if (tics != null) {
-                installTics(e, getInstallCommand(tics))
+                installTics(getInstallCommand(tics))
             }
         } catch (e: Exception) {
             if (e.message == ErrorMessages.NO_AUTH_FILE) {
@@ -54,13 +51,10 @@ class InstallTics : AnAction() {
 
     }
 
-    private fun installTics(e: AnActionEvent, command: GeneralCommandLine) {
-        val context: DataContext = e.dataContext
-        val project: Project? = PlatformDataKeys.PROJECT.getData(context)
-
+    private fun installTics(command: GeneralCommandLine) {
         val handler: ProcessHandler
         try {
-            handler = TicsRunCommand.run(command, callback = ::onHandlerTerminated)
+            handler = RunCommand.run(command, callback = ::onHandlerTerminated)
         } catch (e: ExecutionException) {
             e.printStackTrace()
             TicsOptionPane.showErrorMessageDialog(
@@ -79,7 +73,7 @@ class InstallTics : AnAction() {
             val ok = showOkCancelDialog(
                 "Reload Required",
                 "In order to complete the TICS installation, the IDE needs to be closed and restarted. Do you want to do this now?",
-                "Exit Now",
+                "Shutdown Now",
                 "Later",
                 AllIcons.General.QuestionDialog
             )

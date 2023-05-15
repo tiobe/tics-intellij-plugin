@@ -4,7 +4,7 @@ import com.intellij.execution.ExecutionException
 import com.intellij.execution.configurations.GeneralCommandLine
 import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
-import com.tiobe.plugins.intellij.analyzer.TicsRunCommand
+import com.tiobe.plugins.intellij.analyzer.RunCommand
 import com.tiobe.plugins.intellij.errors.ErrorMessages
 import com.tiobe.plugins.intellij.pane.TicsOptionPane.Companion.showErrorMessageDialog
 
@@ -15,7 +15,7 @@ class RunTicsConfig : AnAction() {
 
     override fun actionPerformed(e: AnActionEvent) {
         try {
-            TicsRunCommand.run(TICSCONFIG_COMMAND, true)
+            RunCommand.run(TICSCONFIG_COMMAND, true)
         } catch (e: ExecutionException) {
             e.printStackTrace()
             showErrorMessageDialog(

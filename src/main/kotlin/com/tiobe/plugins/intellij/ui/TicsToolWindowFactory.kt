@@ -11,22 +11,24 @@ import com.tiobe.plugins.intellij.ui.panels.TicsConsolePanel
 class TicsToolWindowFactory : ToolWindowFactory {
     override fun createToolWindowContent(project: Project, toolWindow: ToolWindow) {
         val contentManager = toolWindow.contentManager
-        addCurrentFileTab(project, contentManager)
+        addAnnotationsTab(project, contentManager)
         addConsoleTab(project, contentManager)
 
         toolWindow.setType(ToolWindowType.DOCKED, null)
     }
 
     companion object {
-        private fun addCurrentFileTab(project: Project, contentManager: ContentManager) {
-            val currentFileContent = contentManager.factory
+        private fun addAnnotationsTab(project: Project, contentManager: ContentManager) {
+            val annotationsPanel = AnnotationsPanel(project)
+            val annotationsPanelContent = contentManager.factory
                 .createContent(
-                    AnnotationsPanel(project),
+                    annotationsPanel,
                     "Annotations",
                     false
                 )
-            currentFileContent.isCloseable = false
-            contentManager.addContent(currentFileContent)
+            annotationsPanelContent.isCloseable = false
+            contentManager.addDataProvider(annotationsPanel)
+            contentManager.addContent(annotationsPanelContent)
         }
 
         private fun addConsoleTab(project: Project, contentManager: ContentManager) {
