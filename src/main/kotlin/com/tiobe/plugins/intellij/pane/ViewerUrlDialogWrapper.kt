@@ -14,15 +14,11 @@ import javax.swing.JTextField
 
 class ViewerUrlDialogWrapper : DialogWrapper(true) {
     private val jTextField: JTextField = JTextField()
-    private var input: String = ""
+    var input: String = ""
 
     init {
         title = "TICS Viewer Configuration Url"
         init()
-    }
-
-    fun getInput(): String {
-        return input
     }
 
     override fun createCenterPanel(): JComponent {

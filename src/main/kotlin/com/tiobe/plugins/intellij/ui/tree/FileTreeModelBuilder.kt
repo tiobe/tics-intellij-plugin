@@ -1,23 +1,24 @@
 package com.tiobe.plugins.intellij.ui.tree
 
 import com.intellij.openapi.vfs.VirtualFile
-import com.tiobe.plugins.intellij.ui.nodes.AnnotationNode
 import com.tiobe.plugins.intellij.ui.nodes.FileNode
 import com.tiobe.plugins.intellij.ui.nodes.RootNode
+import com.tiobe.plugins.intellij.ui.nodes.ViolationNode
+import com.tiobe.plugins.intellij.utilities.Violation
 import javax.swing.tree.DefaultTreeModel
 
 class FileTreeModelBuilder {
-    private val index = FileTreeIndex()
     private val rootNode = RootNode()
     private val model = DefaultTreeModel(rootNode)
+    private val index = FileTreeIndex()
 
     fun getModel(): DefaultTreeModel {
         model.setRoot(rootNode)
         return model
     }
 
-    fun upsertFileWithAnnotations(file: VirtualFile, annotations: List<AnnotationNode.Annotation>) {
-        if (!file.isValid || annotations.isEmpty()) {
+    fun upsertFileWithAnnotations(file: VirtualFile, violations: List<Violation>) {
+        if (!file.isValid || violations.isEmpty()) {
             removeFile(file)
             return
         }
@@ -37,7 +38,7 @@ class FileTreeModelBuilder {
             rootNode.insert(node, insertIndex)
             model.reload(rootNode)
         }
-        setAnnotations(node, annotations)
+        setAnnotations(node, violations)
     }
 
     fun removeFile(file: VirtualFile) {
@@ -48,10 +49,10 @@ class FileTreeModelBuilder {
         }
     }
 
-    private fun setAnnotations(node: FileNode, annotations: List<AnnotationNode.Annotation>) {
+    private fun setAnnotations(node: FileNode, violations: List<Violation>) {
         node.removeAllChildren()
-        annotations.forEach {
-            node.add(AnnotationNode(it))
+        violations.forEach {
+            node.add(ViolationNode(node.file, it))
         }
         model.reload(node)
     }

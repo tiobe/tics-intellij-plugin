@@ -15,7 +15,7 @@ object TicsConsole {
     }
 
     fun attachToProcess(handler: ProcessHandler, firstLine: String? = null) {
-        if (this::consoleView.isInitialized) {
+        if (isInitialized()) {
             consoleView.clear()
             firstLine?.let {
                 consoleView.print("$firstLine\n", ConsoleViewContentType.SYSTEM_OUTPUT)
@@ -27,10 +27,14 @@ object TicsConsole {
     }
 
     fun clear() {
-        if (this::consoleView.isInitialized) {
+        if (isInitialized()) {
             consoleView.clear()
         } else {
             throw Error("Console has not been registered yet.")
         }
+    }
+
+    fun isInitialized(): Boolean {
+        return this::consoleView.isInitialized
     }
 }

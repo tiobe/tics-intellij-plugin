@@ -5,7 +5,7 @@ import com.intellij.tools.SimpleActionGroup
 import com.tiobe.plugins.intellij.console.TicsConsole
 import com.tiobe.plugins.intellij.utilities.TicsActions
 
-class TicsConsolePanel(project: Project) : AbstractPanel(project) {
+class ConsolePanel(project: Project) : AbstractPanel(project) {
     init {
         addConsole()
     }

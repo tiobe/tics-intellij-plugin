@@ -1,22 +1,24 @@
-package com.tiobe.plugins.intellij.analyzer
+package com.tiobe.plugins.intellij.analysis
 
 import com.intellij.execution.ExecutionException
 import com.intellij.execution.configurations.GeneralCommandLine
 import com.intellij.execution.process.OSProcessHandler
 import com.intellij.execution.process.ProcessHandler
+import com.intellij.openapi.project.Project
 import com.intellij.openapi.util.Key
 
-object RunCommand {
+object ProcessRunner {
     private var handler: ProcessHandler? = null
 
     @Throws(ExecutionException::class)
     fun run(
+        project: Project,
         command: GeneralCommandLine,
         ignoreState: Boolean = false,
         callback: ((code: Int) -> Unit)? = null
-    ): ProcessHandler {
+    ): OSProcessHandler {
         val handler = OSProcessHandler(command)
-        val listener = ProcessListener(callback)
+        val listener = ProcessListener(project, callback)
         if (!ignoreState) {
             handler.addProcessListener(listener)
             handler.startNotify()

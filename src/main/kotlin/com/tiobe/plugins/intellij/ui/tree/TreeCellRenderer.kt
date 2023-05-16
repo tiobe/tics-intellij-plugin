@@ -5,7 +5,6 @@ import com.tiobe.plugins.intellij.ui.nodes.AbstractNode
 import javax.swing.JTree
 
 class TreeCellRenderer : ColoredTreeCellRenderer() {
-
     override fun customizeCellRenderer(
         tree: JTree,
         value: Any?,

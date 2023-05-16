@@ -5,19 +5,25 @@ import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.fileEditor.FileEditorManager
 import com.intellij.openapi.project.Project
 import com.intellij.tools.SimpleActionGroup
+import com.intellij.ui.OnePixelSplitter
 import com.intellij.ui.ScrollPaneFactory
-import com.tiobe.plugins.intellij.ui.nodes.AnnotationNode
+import com.tiobe.plugins.intellij.analysis.AnalysisListener
+import com.tiobe.plugins.intellij.ui.analysis.ProcessAnalysis
 import com.tiobe.plugins.intellij.ui.tree.FileTree
 import com.tiobe.plugins.intellij.ui.tree.FileTreeModelBuilder
 
-class AnnotationsPanel(project: Project) : AbstractPanel(project) {
+class ViolationsPanel(project: Project) : AbstractPanel(project) {
     private val fileTreeModelBuilder = FileTreeModelBuilder()
     private val tree = FileTree(project, fileTreeModelBuilder.getModel(), "No annotations to display")
-    private var issue = 0
 
     init {
-        val scrollPane = ScrollPaneFactory.createScrollPane(tree)
-        super.setContent(scrollPane)
+        val splitter = OnePixelSplitter(0.5f)
+        splitter.firstComponent = ScrollPaneFactory.createScrollPane(tree)
+        splitter.secondComponent = InformationPanel
+
+        super.setContent(splitter)
+
+        ProcessAnalysis(project, fileTreeModelBuilder)
     }
 
     override fun createActionGroup(): SimpleActionGroup {
@@ -31,14 +37,7 @@ class AnnotationsPanel(project: Project) : AbstractPanel(project) {
         return object : AnAction() {
             override fun actionPerformed(e: AnActionEvent) {
                 FileEditorManager.getInstance(project).selectedEditor?.file?.let {
-                    fileTreeModelBuilder.upsertFileWithAnnotations(
-                        it, listOf(
-                            AnnotationNode.Annotation(1 + issue),
-                            AnnotationNode.Annotation(2 + issue),
-                            AnnotationNode.Annotation(3 + issue)
-                        )
-                    )
-                    issue += 3
+                    project.messageBus.syncPublisher(AnalysisListener.TOPIC).change(listOf(it.path))
                 }
             }
         }

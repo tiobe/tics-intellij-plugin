@@ -1,4 +1,4 @@
-package com.tiobe.plugins.intellij.analyzer
+package com.tiobe.plugins.intellij.analysis
 
 object ProcessState {
     var state = State.STOPPED

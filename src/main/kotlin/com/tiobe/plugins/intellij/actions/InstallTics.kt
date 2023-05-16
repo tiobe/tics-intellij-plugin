@@ -3,15 +3,17 @@ package com.tiobe.plugins.intellij.actions
 import com.google.gson.Gson
 import com.intellij.execution.ExecutionException
 import com.intellij.execution.configurations.GeneralCommandLine
-import com.intellij.execution.process.ProcessHandler
+import com.intellij.execution.process.OSProcessHandler
 import com.intellij.icons.AllIcons
 import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
+import com.intellij.openapi.actionSystem.PlatformDataKeys
 import com.intellij.openapi.application.ApplicationManager
+import com.intellij.openapi.project.Project
 import com.intellij.openapi.ui.showOkCancelDialog
 import com.intellij.openapi.util.SystemInfo
 import com.tiobe.model.AlertMessages
-import com.tiobe.plugins.intellij.analyzer.RunCommand
+import com.tiobe.plugins.intellij.analysis.ProcessRunner
 import com.tiobe.plugins.intellij.console.TicsConsole
 import com.tiobe.plugins.intellij.errors.ErrorMessages
 import com.tiobe.plugins.intellij.pane.TicsOptionPane
@@ -28,13 +30,16 @@ import java.net.URL
  * Installs TICS on the host machine.
  */
 class InstallTics : AnAction() {
+    private var project: Project? = null
     override fun actionPerformed(e: AnActionEvent) {
+        project = PlatformDataKeys.PROJECT.getData(e.dataContext)
+
         var tics = System.getenv("TICS")
         try {
             if (tics == null) {
                 val dialog = ViewerUrlDialogWrapper()
                 if (dialog.showAndGet()) {
-                    tics = dialog.getInput()
+                    tics = dialog.input
                 }
             }
             if (tics != null) {
@@ -52,9 +57,16 @@ class InstallTics : AnAction() {
     }
 
     private fun installTics(command: GeneralCommandLine) {
-        val handler: ProcessHandler
+        if (project == null) {
+            TicsOptionPane.showErrorMessageDialog(
+                ErrorMessages.NO_ACTIVE_PROJECT
+            )
+            return
+        }
+
+        val handler: OSProcessHandler
         try {
-            handler = RunCommand.run(command, callback = ::onHandlerTerminated)
+            handler = ProcessRunner.run(project!!, command, callback = ::onHandlerTerminated)
         } catch (e: ExecutionException) {
             e.printStackTrace()
             TicsOptionPane.showErrorMessageDialog(
@@ -98,8 +110,7 @@ class InstallTics : AnAction() {
                 val installUrl = getInstallUrl("linux", url, TicsAuthToken.getAuthToken())
                 return GeneralCommandLine(listOf("env TICSIDE='INTELLIJ' bash", "-c", getLinuxInstall(installUrl)))
             } else if (SystemInfo.isWindows) {
-                val installUrl =
-                    getInstallUrl("windows", url, TicsAuthToken.getAuthToken())
+                val installUrl = getInstallUrl("windows", url, TicsAuthToken.getAuthToken())
                 return GeneralCommandLine(listOf("powershell", getWindowsInstall(installUrl)))
             }
             throw Exception("No install command found for platform: ${SystemInfo.OS_NAME}.")

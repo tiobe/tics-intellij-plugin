@@ -2,17 +2,18 @@ package com.tiobe.plugins.intellij.actions
 
 import com.intellij.execution.ExecutionException
 import com.intellij.execution.configurations.GeneralCommandLine
-import com.intellij.execution.process.ProcessHandler
+import com.intellij.execution.process.OSProcessHandler
 import com.intellij.openapi.actionSystem.*
 import com.intellij.openapi.fileEditor.FileDocumentManager
 import com.intellij.openapi.fileEditor.FileEditorManager
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.vfs.VirtualFile
-import com.tiobe.plugins.intellij.analyzer.ProcessState
-import com.tiobe.plugins.intellij.analyzer.RunCommand
+import com.tiobe.plugins.intellij.analysis.ProcessRunner
+import com.tiobe.plugins.intellij.analysis.ProcessState
 import com.tiobe.plugins.intellij.console.TicsConsole
 import com.tiobe.plugins.intellij.errors.ErrorMessages
 import com.tiobe.plugins.intellij.pane.TicsOptionPane.Companion.showErrorMessageDialog
+import com.tiobe.plugins.intellij.utilities.TicsXmlReader.getXmlPath
 
 
 abstract class AnalyzeAction : AnAction() {
@@ -50,12 +51,12 @@ abstract class AnalyzeAction : AnAction() {
         }
 
 
-        val handler: ProcessHandler
+        val handler: OSProcessHandler
         try {
             FileDocumentManager.getInstance().saveAllDocuments()
             val command = getTicsCommand(file, project)
-            command.addParameters(XML, getTempDir())
-            handler = RunCommand.run(command)
+            command.addParameters(XML, getXmlPath())
+            handler = ProcessRunner.run(project, command)
         } catch (e: ExecutionException) {
             e.printStackTrace()
             showErrorMessageDialog(
@@ -75,13 +76,9 @@ abstract class AnalyzeAction : AnAction() {
         TicsConsole.attachToProcess(handler, firstLine)
     }
 
-    private fun getTempDir(): String {
-        return System.getProperty("java.io.tmpdir") + "/tics.xml"
-    }
-
     override fun update(e: AnActionEvent) {
-        e.presentation.isVisible =
-            !ProcessState.isRunning() && !ProcessState.isStopping()
+        e.presentation.isVisible = !ProcessState.isRunning() && !ProcessState.isStopping()
+        e.presentation.isEnabled = TicsConsole.isInitialized()
     }
 
     protected abstract fun getTicsCommand(file: VirtualFile?, project: Project?): GeneralCommandLine

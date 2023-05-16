@@ -1,6 +1,6 @@
 plugins {
     id("java")
-    id("org.jetbrains.kotlin.jvm") version "1.8.20"
+    id("org.jetbrains.kotlin.jvm") version "1.8.21"
     id("org.jetbrains.intellij") version "1.13.3"
 }
 
@@ -51,6 +51,7 @@ dependencies {
     implementation(kotlin("stdlib-jdk8"))
     implementation("com.tiobe.utility:utility:0.1.0")
     implementation("com.tiobe.model:model:0.1.1")
+    implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.15.0")
 }
 kotlin {
     jvmToolchain(17)

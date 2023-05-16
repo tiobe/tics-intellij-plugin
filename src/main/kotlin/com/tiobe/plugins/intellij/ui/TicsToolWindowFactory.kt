@@ -5,8 +5,8 @@ import com.intellij.openapi.wm.ToolWindow
 import com.intellij.openapi.wm.ToolWindowFactory
 import com.intellij.openapi.wm.ToolWindowType
 import com.intellij.ui.content.ContentManager
-import com.tiobe.plugins.intellij.ui.panels.AnnotationsPanel
-import com.tiobe.plugins.intellij.ui.panels.TicsConsolePanel
+import com.tiobe.plugins.intellij.ui.panels.ConsolePanel
+import com.tiobe.plugins.intellij.ui.panels.ViolationsPanel
 
 class TicsToolWindowFactory : ToolWindowFactory {
     override fun createToolWindowContent(project: Project, toolWindow: ToolWindow) {
@@ -19,7 +19,7 @@ class TicsToolWindowFactory : ToolWindowFactory {
 
     companion object {
         private fun addAnnotationsTab(project: Project, contentManager: ContentManager) {
-            val annotationsPanel = AnnotationsPanel(project)
+            val annotationsPanel = ViolationsPanel(project)
             val annotationsPanelContent = contentManager.factory
                 .createContent(
                     annotationsPanel,
@@ -33,7 +33,7 @@ class TicsToolWindowFactory : ToolWindowFactory {
 
         private fun addConsoleTab(project: Project, contentManager: ContentManager) {
             val logContent = contentManager.factory.createContent(
-                TicsConsolePanel(project),
+                ConsolePanel(project),
                 "Console",
                 false
             )

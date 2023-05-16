@@ -13,7 +13,8 @@ class FileNode(file: VirtualFile) : AbstractNode() {
 
     override fun render(renderer: TreeCellRenderer) {
         renderer.append(file.name)
-        renderer.append(" ${file.path}", SimpleTextAttributes.GRAY_ATTRIBUTES)
+        renderer.append(" ($childCount violations)", SimpleTextAttributes.GRAYED_BOLD_ATTRIBUTES)
+        renderer.append(" ${file.path}", SimpleTextAttributes.GRAYED_SMALL_ATTRIBUTES)
         renderer.icon = file.fileType.icon
     }
 }
