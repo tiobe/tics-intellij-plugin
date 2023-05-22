@@ -18,7 +18,7 @@ object TicsIcons {
     val CONFIGURE_TICS: Icon = load("/icons/TI_configuration.png")
 
     @JvmField
-    val TICS_LOGO: Icon = load("/icons/TI_icon.png")
+    val TICS_LOGO: Icon = load("/icons/TI_logo.svg")
 
     private fun load(path: String): Icon {
         return IconLoader.getIcon(path, TicsIcons::class.java)

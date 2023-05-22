@@ -19,16 +19,16 @@ class TicsToolWindowFactory : ToolWindowFactory {
 
     companion object {
         private fun addAnnotationsTab(project: Project, contentManager: ContentManager) {
-            val annotationsPanel = ViolationsPanel(project)
-            val annotationsPanelContent = contentManager.factory
+            val violationsPanel = ViolationsPanel(project)
+            val violationsPanelContent = contentManager.factory
                 .createContent(
-                    annotationsPanel,
-                    "Annotations",
+                    violationsPanel,
+                    "Violations",
                     false
                 )
-            annotationsPanelContent.isCloseable = false
-            contentManager.addDataProvider(annotationsPanel)
-            contentManager.addContent(annotationsPanelContent)
+            violationsPanelContent.isCloseable = false
+            contentManager.addDataProvider(violationsPanel)
+            contentManager.addContent(violationsPanelContent)
         }
 
         private fun addConsoleTab(project: Project, contentManager: ContentManager) {

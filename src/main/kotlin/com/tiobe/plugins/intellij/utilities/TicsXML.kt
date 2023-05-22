@@ -21,6 +21,7 @@ data class Violation @JsonCreator constructor(
     @JsonProperty("Level") val level: Int,
     @JsonProperty("Message") val message: String?,
     @JsonProperty("Reference") val reference: String?,
+    @JsonProperty("New") val new: TicsBoolean?,
 )
 
 enum class TicsBoolean(val value: Boolean) {
