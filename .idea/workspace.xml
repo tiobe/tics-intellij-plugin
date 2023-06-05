@@ -7,9 +7,12 @@
     <list default="true" id="65854f2e-6315-46d9-8d4c-8a82e869d07a" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/tiobe/plugins/intellij/actions/ClearConsole.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/tiobe/plugins/intellij/actions/ClearConsole.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/tiobe/plugins/intellij/actions/InstallTics.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/tiobe/plugins/intellij/actions/InstallTics.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/tiobe/plugins/intellij/actions/RunTicsConfig.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/tiobe/plugins/intellij/actions/RunTicsConfig.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/tiobe/plugins/intellij/pane/ViewerUrlDialogWrapper.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/tiobe/plugins/intellij/pane/ViewerUrlDialogWrapper.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/tiobe/plugins/intellij/ui/analysis/ProcessAnalysis.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/tiobe/plugins/intellij/ui/analysis/ProcessAnalysis.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/tiobe/plugins/intellij/ui/tree/FileTree.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/tiobe/plugins/intellij/ui/tree/FileTree.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/tiobe/plugins/intellij/ui/tree/FileTreeModelBuilder.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/tiobe/plugins/intellij/ui/tree/FileTreeModelBuilder.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/tiobe/plugins/intellij/utilities/TicsAuthToken.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/tiobe/plugins/intellij/utilities/TicsAuthToken.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,6 +50,9 @@
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectId" id="2PvNJU0Qm75zD7XPTPgDn7Bi2aY" />
   <component name="ProjectViewState">

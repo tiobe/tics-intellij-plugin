@@ -7,6 +7,7 @@ import com.tiobe.model.AlertMessages
 import com.tiobe.utility.TicsHttpClient
 import org.apache.hc.client5.http.classic.methods.HttpGet
 import org.apache.hc.core5.http.io.entity.EntityUtils
+import org.apache.hc.core5.util.Timeout
 import java.io.FileNotFoundException
 import java.io.FileReader
 
@@ -33,16 +34,21 @@ object TicsAuthToken {
 
         val httpGet = HttpGet(ticsConfigUrl)
 
+        client.setTimeout(Timeout.ofSeconds(5))
         client.setRequestedWithTics()
         val response = client.createHttpClient().use { http ->
-            http.execute(httpGet) {
-                val entity = EntityUtils.toString(it.entity)
-                val alertMessages = Gson().fromJson(entity, AlertMessages::class.java)
-                if (alertMessages.alertMessages != null) {
-                    Response(it.code, alertMessages.alertMessages[0].header)
-                } else {
-                    Response(it.code, entity)
+            try {
+                http.execute(httpGet) {
+                    val entity = EntityUtils.toString(it.entity)
+                    val alertMessages = Gson().fromJson(entity, AlertMessages::class.java)
+                    if (alertMessages.alertMessages != null) {
+                        Response(it.code, alertMessages.alertMessages[0].header)
+                    } else {
+                        Response(it.code, entity)
+                    }
                 }
+            } catch (e: Exception) {
+                Response(408, "The following viewer could not be reached: ")
             }
         }
 

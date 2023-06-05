@@ -29,8 +29,6 @@ class ProcessAnalysis(project: Project, private val model: FileTreeModelBuilder)
                 }
             }
         }
-
-
     }
 
     private fun getViolationsForFile(file: VirtualFile, violations: List<Violation>): List<Violation> {

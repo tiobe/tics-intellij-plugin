@@ -60,6 +60,11 @@ class ViewerUrlDialogWrapper : DialogWrapper(true) {
                 showErrorMessageDialogWithLink(ErrorMessages.NO_AUTH_FILE, url)
             }
 
+            408 -> {
+                val baseUrl = jTextField.text.split("/api/")[0]
+                showErrorMessageDialogWithLink(validAuthTokenInfo.message, baseUrl)
+            }
+
             else -> {
                 showErrorMessageDialog(validAuthTokenInfo.message)
             }
