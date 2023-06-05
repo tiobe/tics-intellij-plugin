@@ -29,15 +29,21 @@ class FileTree(private val project: Project, model: TreeModel, emptyState: Strin
             }
         }
 
+        // Add double click listener on the file tree.
         EditSourceOnDoubleClickHandler.install(this) {
-            navigateToFile()?.navigate(false)
+            navigate()?.navigate(false)
         }
+        // Add enter key listener on the file tree.
         EditSourceOnEnterKeyHandler.install(this) {
-            navigateToFile()?.navigate(false)
+            navigate()?.navigate(false)
         }
     }
 
-    private fun navigateToFile(): OpenFileDescriptor? {
+    /**
+     * Navigate to the line of a file for the selected violation.
+     * Invoked with either double-clicking or the enter key.
+     */
+    private fun navigate(): OpenFileDescriptor? {
         val node = selectionPath?.lastPathComponent
         if (node is ViolationNode) {
             return OpenFileDescriptor(project, node.file, node.violation.line - 1, -1)
@@ -45,9 +51,12 @@ class FileTree(private val project: Project, model: TreeModel, emptyState: Strin
         return null
     }
 
+    /**
+     * Implementation of DataProvider. Is needed to navigate to a violation with the enter key.
+     */
     override fun getData(dataId: String): Any? {
-        return if (CommonDataKeys.VIRTUAL_FILE.`is`(dataId) || CommonDataKeys.NAVIGATABLE.`is`(dataId)) {
-            navigateToFile()
+        return if (CommonDataKeys.NAVIGATABLE.`is`(dataId)) {
+            navigate()
         } else {
             null
         }

@@ -10,8 +10,9 @@ import com.tiobe.plugins.intellij.utilities.TicsXmlReader.getXmlPath
 import com.tiobe.plugins.intellij.utilities.TicsXmlReader.readXml
 import com.tiobe.plugins.intellij.utilities.Violation
 import org.jetbrains.io.LocalFileFinder
+import java.nio.file.Paths
 
-class ProcessAnalysis(private val project: Project, private val model: FileTreeModelBuilder) {
+class ProcessAnalysis(project: Project, private val model: FileTreeModelBuilder) {
     init {
         project.messageBus.connect().subscribe(AnalysisListener.TOPIC, AnalysisListener {
             invokeLater { analyze(it) }
@@ -34,7 +35,8 @@ class ProcessAnalysis(private val project: Project, private val model: FileTreeM
 
     private fun getViolationsForFile(file: VirtualFile, violations: List<Violation>): List<Violation> {
         return violations.filter {
-            it.file == file.path
+            // Compare the files normalized, as a difference in slashed can mess up the comparison.
+            Paths.get(it.file).normalize() == file.toNioPath().normalize()
         }
     }
 }

@@ -41,7 +41,7 @@ class FileTreeModelBuilder {
         setAnnotations(node, violations)
     }
 
-    fun removeFile(file: VirtualFile) {
+    private fun removeFile(file: VirtualFile) {
         index.getFileNode(file)?.let {
             index.remove(it.file)
             model.removeNodeFromParent(it)

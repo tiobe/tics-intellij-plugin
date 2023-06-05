@@ -5,21 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="65854f2e-6315-46d9-8d4c-8a82e869d07a" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/tiobe/plugins/intellij/ui/utils/TextAttributes.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/icons/TI_logo.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/icons/TI_logo_dark.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/tiobe/plugins/intellij/icons/TicsIcons.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/tiobe/plugins/intellij/icons/TicsIcons.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/tiobe/plugins/intellij/ui/TicsToolWindowFactory.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/tiobe/plugins/intellij/ui/TicsToolWindowFactory.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/tiobe/plugins/intellij/ui/nodes/ViolationNode.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/tiobe/plugins/intellij/ui/nodes/ViolationNode.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/tiobe/plugins/intellij/ui/panels/ViolationsPanel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/tiobe/plugins/intellij/ui/panels/ViolationsPanel.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/tiobe/plugins/intellij/ui/analysis/ProcessAnalysis.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/tiobe/plugins/intellij/ui/analysis/ProcessAnalysis.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/tiobe/plugins/intellij/ui/tree/FileTree.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/tiobe/plugins/intellij/ui/tree/FileTree.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/tiobe/plugins/intellij/utilities/TicsXML.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/tiobe/plugins/intellij/utilities/TicsXML.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/icons/TI_icon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/tiobe/plugins/intellij/ui/tree/FileTreeModelBuilder.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/tiobe/plugins/intellij/ui/tree/FileTreeModelBuilder.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,8 +59,8 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;31903-bootstrap__install&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/LuukJanssen/Software&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.ide.settings.new.ui&quot;
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/LuukJanssen/Software/tics-intellij-plugin/build/distributions/tics-intellij-plugin-1.0.0-beta.zip&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
   }
 }</component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -83,5 +73,16 @@
       <updated>1684333528943</updated>
     </task>
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>
