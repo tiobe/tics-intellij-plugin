@@ -1,6 +1,7 @@
 package com.tiobe.plugins.intellij.utilities
 
 import com.fasterxml.jackson.dataformat.xml.XmlMapper
+import java.nio.file.Paths
 
 object TicsXmlReader {
 
@@ -9,6 +10,6 @@ object TicsXmlReader {
     }
 
     fun getXmlPath(): String {
-        return System.getProperty("java.io.tmpdir") + "/tics.xml"
+        return Paths.get(System.getProperty("java.io.tmpdir") + "/tics.xml").normalize().toString()
     }
 }
