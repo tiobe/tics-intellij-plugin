@@ -10,6 +10,7 @@ import com.tiobe.plugins.intellij.pane.TicsOptionPane.Companion.showErrorMessage
 class ProcessListener(private val project: Project, callback: ((code: Int) -> Unit)?) : ProcessListener {
     private val callbackFunction = callback
     private var analyzedFiles = mutableListOf<String>()
+    private var canceledByUser = false
 
     override fun startNotified(event: ProcessEvent) {
         ProcessState.state = ProcessState.State.RUNNING
@@ -19,15 +20,20 @@ class ProcessListener(private val project: Project, callback: ((code: Int) -> Un
     override fun processTerminated(event: ProcessEvent) {
         ProcessState.state = ProcessState.State.STOPPED
         updateStatusListenerBus()
-        updateAnalysisListenerBus()
 
-        if (event.exitCode != 0 && event.exitCode != 137) {
-            showErrorMessageDialog("TICS Analysis unsuccessful, please check the TICS Console for errors.")
-        }
+        // if the process is canceled by the user, nothing needs to happen
+        if (!canceledByUser) {
+            updateAnalysisListenerBus()
 
-        invokeLater {
-            callbackFunction?.let { it(event.exitCode) }
+            if (event.exitCode != 0) {
+                showErrorMessageDialog("TICS Analysis unsuccessful, please check the TICS Console for errors.")
+            }
+
+            invokeLater {
+                callbackFunction?.let { it(event.exitCode) }
+            }
         }
+        canceledByUser = false
     }
 
     override fun processWillTerminate(event: ProcessEvent, willBeDestroyed: Boolean) {
@@ -43,6 +49,10 @@ class ProcessListener(private val project: Project, callback: ((code: Int) -> Un
         regex.find(event.text)?.let {
             analyzedFiles.add(it.groupValues[1])
         }
+    }
+
+    fun setCanceledByUser() {
+        canceledByUser = true
     }
 
     private fun updateStatusListenerBus() {

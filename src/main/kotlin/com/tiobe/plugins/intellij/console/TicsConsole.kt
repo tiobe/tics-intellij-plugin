@@ -10,7 +10,9 @@ object TicsConsole {
     private lateinit var consoleView: ConsoleView
 
     fun setConsoleView(project: Project): ConsoleView {
-        consoleView = TextConsoleBuilderFactory.getInstance().createBuilder(project).console
+        if (!isInitialized()) {
+            consoleView = TextConsoleBuilderFactory.getInstance().createBuilder(project).console
+        }
         return consoleView
     }
 

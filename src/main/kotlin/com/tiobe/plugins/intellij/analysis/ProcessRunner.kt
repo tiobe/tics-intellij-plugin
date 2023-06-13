@@ -9,6 +9,7 @@ import com.intellij.openapi.util.Key
 
 object ProcessRunner {
     private var handler: ProcessHandler? = null
+    private var listener: ProcessListener? = null
 
     @Throws(ExecutionException::class)
     fun run(
@@ -22,12 +23,14 @@ object ProcessRunner {
         if (!ignoreState) {
             handler.addProcessListener(listener)
             handler.startNotify()
+            this.listener = listener
             this.handler = handler
         }
         return handler
     }
 
     fun stop() {
+        listener?.setCanceledByUser()
         handler?.notifyTextAvailable("Process cancelled by user", Key<String>(""))
         handler?.destroyProcess()
     }
