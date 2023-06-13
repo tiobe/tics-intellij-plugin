@@ -21,7 +21,7 @@ class ProcessListener(private val project: Project, callback: ((code: Int) -> Un
         updateStatusListenerBus()
         updateAnalysisListenerBus()
 
-        if (event.exitCode != 0) {
+        if (event.exitCode != 0 && event.exitCode != 137) {
             showErrorMessageDialog("TICS Analysis unsuccessful, please check the TICS Console for errors.")
         }
 

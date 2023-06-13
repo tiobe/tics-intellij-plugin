@@ -117,7 +117,7 @@ class InstallTics : AnAction() {
         try {
             if (SystemInfo.isLinux) {
                 val installUrl = getInstallUrl("linux", url, TicsAuthToken.getAuthToken())
-                return GeneralCommandLine(listOf("env TICSIDE='INTELLIJ' bash", "-c", getLinuxInstall(installUrl)))
+                return GeneralCommandLine(listOf("bash", "-c", getLinuxInstall(installUrl))).withEnvironment("TICSIDE", "INTELLIJ")
             } else if (SystemInfo.isWindows) {
                 val installUrl = getInstallUrl("windows", url, TicsAuthToken.getAuthToken())
                 return GeneralCommandLine(listOf("powershell", getWindowsInstall(installUrl)))

@@ -67,11 +67,12 @@ object TicsAuthToken {
         if (ticsAuthToken == null) {
             var tokenPath = ""
             if (SystemInfo.isLinux) {
-                tokenPath = System.getProperty("user.home")
+                tokenPath = System.getProperty("user.home") + "/.tics/tics_client.token"
             } else if (SystemInfo.isWindows) {
                 tokenPath = System.getenv("APPDATA") + "\\TICS\\tics_client.token"
             }
             return try {
+                println(tokenPath)
                 val reader = JsonReader(FileReader(tokenPath))
                 Gson().fromJson<AuthToken>(reader, AuthToken::class.java).token
             } catch (_: FileNotFoundException) {

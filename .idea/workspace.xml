@@ -4,15 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="65854f2e-6315-46d9-8d4c-8a82e869d07a" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/kotlin/com/tiobe/plugins/intellij/logger/TicsLogger.kt" afterDir="false" />
+    <list default="true" id="95db00a8-b317-4d97-8119-c6c0786d6be0" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/tiobe/plugins/intellij/actions/InstallTics.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/tiobe/plugins/intellij/actions/InstallTics.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/tiobe/plugins/intellij/analysis/ProcessListener.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/tiobe/plugins/intellij/analysis/ProcessListener.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/tiobe/plugins/intellij/ui/analysis/ProcessAnalysis.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/tiobe/plugins/intellij/ui/analysis/ProcessAnalysis.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/tiobe/plugins/intellij/ui/tree/FileTreeModelBuilder.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/tiobe/plugins/intellij/ui/tree/FileTreeModelBuilder.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/tiobe/plugins/intellij/utilities/TicsXmlReader.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/tiobe/plugins/intellij/utilities/TicsXmlReader.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/icons/TI_logo.svg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/icons/TI_logo.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/icons/TI_logo_dark.svg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/icons/TI_logo_dark.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/tiobe/plugins/intellij/utilities/TicsAuthToken.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/tiobe/plugins/intellij/utilities/TicsAuthToken.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,39 +32,16 @@
             </after_sync>
           </activation>
         </task>
-        <projects_view>
-          <tree_state>
-            <expand>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="tics-intellij-plugin" type="f1a62948:ProjectNode" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="tics-intellij-plugin" type="f1a62948:ProjectNode" />
-                <item name="Dependencies" type="6de06a37:ExternalSystemViewDefaultContributor$MyDependenciesNode" />
-              </path>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="tics-intellij-plugin" type="f1a62948:ProjectNode" />
-                <item name="Dependencies" type="6de06a37:ExternalSystemViewDefaultContributor$MyDependenciesNode" />
-                <item name="compileClasspath" type="62daadca:ExternalSystemViewDefaultContributor$DependencyScopeExternalSystemNode" />
-              </path>
-            </expand>
-            <select />
-          </tree_state>
-        </projects_view>
+        <projects_view />
       </state>
     </system>
   </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="Kotlin Object" />
-      </list>
-    </option>
-  </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="LogFilters">
@@ -79,38 +54,25 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProblemsViewState">
-    <option name="selectedTabId" value="CurrentFile" />
-  </component>
-  <component name="ProjectId" id="2PvNJU0Qm75zD7XPTPgDn7Bi2aY" />
+  <component name="ProjectId" id="2R6uJSpAfSLrKtj7FcfvCqZIN0D" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "31903-bootstrap__install",
-    "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "C:/Users/LuukJanssen/Software/tics-intellij-plugin/build/distributions/tics-intellij-plugin-1.0.0-beta.zip",
-    "settings.editor.selected.configurable": "preferences.pluginManager"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;
   }
-}]]></component>
-  <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\LuukJanssen\Software\tics-intellij-plugin\src\main\resources\META-INF" />
-      <recent name="C:\Users\LuukJanssen\Software\tics-intellij-plugin\src\main\resources" />
-    </key>
-  </component>
+}</component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="65854f2e-6315-46d9-8d4c-8a82e869d07a" name="Changes" comment="" />
-      <created>1684333528943</created>
+      <changelist id="95db00a8-b317-4d97-8119-c6c0786d6be0" name="Changes" comment="" />
+      <created>1686582780692</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1684333528943</updated>
+      <updated>1686582780692</updated>
     </task>
     <servers />
   </component>
@@ -119,14 +81,22 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="origin/31903-bootstrap_install" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>
     </option>
-  </component>
-  <component name="XSLT-Support.FileAssociations.UIState">
-    <expand />
-    <select />
   </component>
 </project>
