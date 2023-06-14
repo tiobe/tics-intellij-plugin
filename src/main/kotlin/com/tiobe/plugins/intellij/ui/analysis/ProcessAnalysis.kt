@@ -43,7 +43,7 @@ class ProcessAnalysis(project: Project, private val model: FileTreeModelBuilder)
                 }
             }
         } catch (e: Exception) {
-            logger.error(e.message)
+            logger.warn(e.message)
         }
     }
 

@@ -2,23 +2,19 @@ package com.tiobe.plugins.intellij.actions
 
 import com.intellij.execution.ExecutionException
 import com.intellij.execution.configurations.GeneralCommandLine
-import com.intellij.openapi.actionSystem.ActionUpdateThread
-import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
-import com.intellij.openapi.actionSystem.PlatformDataKeys
 import com.intellij.openapi.project.Project
 import com.tiobe.plugins.intellij.analysis.ProcessRunner
-import com.tiobe.plugins.intellij.console.TicsConsole
 import com.tiobe.plugins.intellij.errors.ErrorMessages
 import com.tiobe.plugins.intellij.pane.TicsOptionPane.Companion.showErrorMessageDialog
 
-class RunTicsConfig : AnAction() {
+class LaunchTicsConfig : AbstractAction() {
     companion object {
         private val TICSCONFIG_COMMAND = GeneralCommandLine("TICSConfig")
     }
 
     override fun actionPerformed(e: AnActionEvent) {
-        val project: Project? = PlatformDataKeys.PROJECT.getData(e.dataContext)
+        val project: Project? = e.project
         if (project == null) {
             showErrorMessageDialog(
                 ErrorMessages.NO_ACTIVE_PROJECT
@@ -26,6 +22,12 @@ class RunTicsConfig : AnAction() {
             return
         }
 
+        if (ticsInstalledWrapper(project)) {
+            launchTicsConfig(project)
+        }
+    }
+
+    private fun launchTicsConfig(project: Project) {
         try {
             ProcessRunner.run(project, TICSCONFIG_COMMAND, true)
         } catch (e: ExecutionException) {
@@ -34,13 +36,5 @@ class RunTicsConfig : AnAction() {
                 ErrorMessages.getExecutionErrorMessage(TICSCONFIG_COMMAND.commandLineString, e.message)
             )
         }
-    }
-
-    override fun update(e: AnActionEvent) {
-        e.presentation.isEnabled = TicsConsole.isInitialized()
-    }
-
-    override fun getActionUpdateThread(): ActionUpdateThread {
-        return ActionUpdateThread.BGT
     }
 }

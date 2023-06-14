@@ -1,14 +1,10 @@
-package com.tiobe.plugins.intellij.actions
+package com.tiobe.plugins.intellij.install
 
 import com.google.gson.Gson
 import com.intellij.execution.ExecutionException
 import com.intellij.execution.configurations.GeneralCommandLine
 import com.intellij.execution.process.OSProcessHandler
 import com.intellij.icons.AllIcons
-import com.intellij.openapi.actionSystem.ActionUpdateThread
-import com.intellij.openapi.actionSystem.AnAction
-import com.intellij.openapi.actionSystem.AnActionEvent
-import com.intellij.openapi.actionSystem.PlatformDataKeys
 import com.intellij.openapi.application.ApplicationManager
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.ui.showOkCancelDialog
@@ -27,24 +23,43 @@ import org.apache.hc.core5.net.URIBuilder
 import java.net.URL
 
 
-/**
- * Installs TICS on the host machine.
- */
-class InstallTics : AnAction() {
-    private var project: Project? = null
-    override fun actionPerformed(e: AnActionEvent) {
-        project = PlatformDataKeys.PROJECT.getData(e.dataContext)
+object InstallTics {
+    private var isInstalled: Boolean? = null
 
+    fun isTicsInstalled(): Boolean {
+        if (isInstalled != null) {
+            return isInstalled!!
+        }
+
+        var command = ""
+        if (SystemInfo.isLinux) {
+            command = "which TICS"
+        } else if (SystemInfo.isWindows) {
+            command = "where TICS"
+        }
+
+        isInstalled = if (command != "") {
+            val process = Runtime.getRuntime().exec(command)
+            val exitCode = process.waitFor()
+            println("$command exited with code $exitCode")
+            (exitCode == 0)
+        } else {
+            false
+        }
+
+        return isInstalled!!
+    }
+
+    fun install(project: Project?) {
         var tics = System.getenv("TICS")
         try {
-            if (tics == null) {
-                val dialog = ViewerUrlDialogWrapper()
-                if (dialog.showAndGet()) {
-                    tics = dialog.input
+            ViewerUrlDialogWrapper(tics).let {
+                if (it.showAndGet()) {
+                    tics = it.input
+                    if (tics != null) {
+                        runInstallTics(project, getInstallCommand(tics))
+                    }
                 }
-            }
-            if (tics != null) {
-                installTics(getInstallCommand(tics))
             }
         } catch (e: Exception) {
             if (e.message == ErrorMessages.NO_AUTH_FILE) {
@@ -54,18 +69,9 @@ class InstallTics : AnAction() {
                 TicsOptionPane.showErrorMessageDialog(e)
             }
         }
-
     }
 
-    override fun update(e: AnActionEvent) {
-        e.presentation.isEnabled = TicsConsole.isInitialized()
-    }
-
-    override fun getActionUpdateThread(): ActionUpdateThread {
-        return ActionUpdateThread.BGT
-    }
-
-    private fun installTics(command: GeneralCommandLine) {
+    private fun runInstallTics(project: Project?, command: GeneralCommandLine) {
         if (project == null) {
             TicsOptionPane.showErrorMessageDialog(
                 ErrorMessages.NO_ACTIVE_PROJECT
@@ -75,7 +81,7 @@ class InstallTics : AnAction() {
 
         val handler: OSProcessHandler
         try {
-            handler = ProcessRunner.run(project!!, command, callback = ::onHandlerTerminated)
+            handler = ProcessRunner.run(project, command, callback = ::onHandlerTerminated)
         } catch (e: ExecutionException) {
             e.printStackTrace()
             TicsOptionPane.showErrorMessageDialog(
@@ -91,14 +97,14 @@ class InstallTics : AnAction() {
      */
     private fun onHandlerTerminated(exitCode: Int) {
         if (exitCode == 0) {
-            val ok = showOkCancelDialog(
+            val dialogExitCode = showOkCancelDialog(
                 "Reload Required",
                 "In order to complete the TICS installation, the IDE needs to be closed and restarted. Do you want to do this now?",
                 "Shutdown Now",
                 "Later",
                 AllIcons.General.QuestionDialog
             )
-            if (ok == 0) {
+            if (dialogExitCode == 0) {
                 // Close IntelliJ
                 ApplicationManager.getApplication().exit()
             }

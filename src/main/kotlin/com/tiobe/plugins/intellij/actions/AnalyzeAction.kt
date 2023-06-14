@@ -16,7 +16,7 @@ import com.tiobe.plugins.intellij.pane.TicsOptionPane.Companion.showErrorMessage
 import com.tiobe.plugins.intellij.utilities.TicsXmlReader.getXmlPath
 
 
-abstract class AnalyzeAction : AnAction() {
+abstract class AnalyzeAction : AbstractAction() {
 
     companion object {
         const val TICS_COMMAND: String = "TICS"
@@ -27,9 +27,7 @@ abstract class AnalyzeAction : AnAction() {
     }
 
     override fun actionPerformed(e: AnActionEvent) {
-        val context: DataContext = e.dataContext
-
-        val project: Project? = PlatformDataKeys.PROJECT.getData(context)
+        val project: Project? = e.project
         if (project == null) {
             showErrorMessageDialog(
                 ErrorMessages.NO_ACTIVE_PROJECT
@@ -37,6 +35,12 @@ abstract class AnalyzeAction : AnAction() {
             return
         }
 
+        if (ticsInstalledWrapper(project)) {
+            analyze(e.dataContext, project)
+        }
+    }
+
+    private fun analyze(context: DataContext, project: Project) {
         // try to get the file/folder from context, otherwise check if they can be retrieved from the opened editor
         val file: VirtualFile? = PlatformDataKeys.VIRTUAL_FILE.getData(context).let {
             it ?: project.let { it1 ->
@@ -77,15 +81,11 @@ abstract class AnalyzeAction : AnAction() {
     }
 
     override fun update(e: AnActionEvent) {
+        super.update(e)
         e.presentation.isVisible = !ProcessState.isRunning() && !ProcessState.isStopping()
-        e.presentation.isEnabled = TicsConsole.isInitialized()
     }
 
     protected abstract fun getTicsCommand(file: VirtualFile?, project: Project?): GeneralCommandLine
 
     protected abstract fun isFileRequired(): Boolean
-
-    override fun getActionUpdateThread(): ActionUpdateThread {
-        return ActionUpdateThread.BGT
-    }
 }

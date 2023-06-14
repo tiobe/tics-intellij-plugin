@@ -36,7 +36,7 @@
                     icon="com.tiobe.plugins.intellij.icons.TicsIcons.ANALYZE_FOLDER" text="Analyze Project with TICS"/>
             <action id="TICS.CancelAnalysis" class="com.tiobe.plugins.intellij.actions.CancelAnalysis"
                     icon="com.tiobe.plugins.intellij.icons.TicsIcons.CANCEL_TICS" text="Cancel TICS Analysis"/>
-            <action id="TICS.RunTicsConfig" class="com.tiobe.plugins.intellij.actions.RunTicsConfig"
+            <action id="TICS.RunTicsConfig" class="com.tiobe.plugins.intellij.actions.LaunchTicsConfig"
                     icon="com.tiobe.plugins.intellij.icons.TicsIcons.CONFIGURE_TICS" text="TICS Configuration">
             </action>
         </group>
@@ -50,7 +50,7 @@
 
         <group text="TICS" popup="true">
             <reference id="TICS"/>
-            <action id="TICS.InstallTics" class="com.tiobe.plugins.intellij.actions.InstallTics"
+            <action id="TICS.InstallTics" class="com.tiobe.plugins.intellij.actions.InstallTicsAction"
                     icon="AllIcons.Actions.Install" text="Install TICS"/>
             <add-to-group group-id="ToolsMenu"/>
         </group>

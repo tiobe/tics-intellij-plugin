@@ -12,9 +12,9 @@ import javax.swing.JComponent
 import javax.swing.JLabel
 import javax.swing.JTextField
 
-class ViewerUrlDialogWrapper : DialogWrapper(true) {
-    private val jTextField: JTextField = JTextField()
-    var input: String = ""
+class ViewerUrlDialogWrapper(value: String? = null) : DialogWrapper(true) {
+    private val jTextField: JTextField = JTextField(value)
+    var input: String? = null
 
     init {
         title = "TICS Viewer Configuration Url"
