@@ -3,10 +3,8 @@ package com.tiobe.plugins.intellij.actions
 import com.intellij.icons.AllIcons
 import com.intellij.openapi.actionSystem.ActionUpdateThread
 import com.intellij.openapi.actionSystem.AnAction
-import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.ui.showOkCancelDialog
-import com.tiobe.plugins.intellij.console.TicsConsole
 import com.tiobe.plugins.intellij.install.InstallTics
 
 abstract class AbstractAction : AnAction() {
@@ -32,10 +30,6 @@ abstract class AbstractAction : AnAction() {
         } else {
             true
         }
-    }
-
-    override fun update(e: AnActionEvent) {
-        e.presentation.isEnabled = TicsConsole.isInitialized()
     }
 
     override fun getActionUpdateThread(): ActionUpdateThread {

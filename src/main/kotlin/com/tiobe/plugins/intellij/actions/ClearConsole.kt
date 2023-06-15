@@ -7,11 +7,7 @@ import com.tiobe.plugins.intellij.console.TicsConsole
 
 class ClearConsole : AnAction() {
     override fun actionPerformed(e: AnActionEvent) {
-        TicsConsole.clear()
-    }
-
-    override fun update(e: AnActionEvent) {
-        e.presentation.isEnabled = TicsConsole.isInitialized()
+        TicsConsole.getInstance(e.project!!).clear()
     }
 
     override fun getActionUpdateThread(): ActionUpdateThread {

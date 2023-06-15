@@ -77,7 +77,7 @@ abstract class AnalyzeAction : AbstractAction() {
             null
         }
 
-        TicsConsole.attachToProcess(handler, firstLine)
+        TicsConsole.getInstance(project).attachToProcess(handler, firstLine)
     }
 
     override fun update(e: AnActionEvent) {

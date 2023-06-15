@@ -20,11 +20,6 @@ class InstallTicsAction : AnAction() {
         InstallTics.install(project)
     }
 
-    override fun update(e: AnActionEvent) {
-        super.update(e)
-        e.presentation.isEnabled = TicsConsole.isInitialized()
-    }
-
     override fun getActionUpdateThread(): ActionUpdateThread {
         return ActionUpdateThread.BGT
     }

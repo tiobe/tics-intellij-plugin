@@ -5,6 +5,7 @@ import com.intellij.execution.ExecutionException
 import com.intellij.execution.configurations.GeneralCommandLine
 import com.intellij.execution.process.OSProcessHandler
 import com.intellij.icons.AllIcons
+import com.intellij.openapi.Disposable
 import com.intellij.openapi.application.ApplicationManager
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.ui.showOkCancelDialog
@@ -23,7 +24,7 @@ import org.apache.hc.core5.net.URIBuilder
 import java.net.URL
 
 
-object InstallTics {
+object InstallTics : Disposable {
     private var isInstalled: Boolean? = null
 
     fun isTicsInstalled(): Boolean {
@@ -89,7 +90,7 @@ object InstallTics {
             )
             return
         }
-        TicsConsole.attachToProcess(handler)
+        TicsConsole.getInstance(project).attachToProcess(handler)
     }
 
     /**
@@ -217,4 +218,8 @@ object InstallTics {
         val uploadArtifact: String,
         val installTics: String?,
     )
+
+    override fun dispose() {
+        /* Just trying something */
+    }
 }

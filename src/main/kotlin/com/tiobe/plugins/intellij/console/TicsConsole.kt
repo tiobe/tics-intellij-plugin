@@ -4,39 +4,41 @@ import com.intellij.execution.filters.TextConsoleBuilderFactory
 import com.intellij.execution.process.ProcessHandler
 import com.intellij.execution.ui.ConsoleView
 import com.intellij.execution.ui.ConsoleViewContentType
+import com.intellij.openapi.Disposable
 import com.intellij.openapi.project.Project
+import com.intellij.openapi.util.Disposer
+import com.tiobe.plugins.intellij.install.InstallTics
+import javax.swing.JComponent
 
-object TicsConsole {
-    private lateinit var consoleView: ConsoleView
+class TicsConsole(project: Project) {
+    private var consoleView: ConsoleView
 
-    fun setConsoleView(project: Project): ConsoleView {
-        if (!isInitialized()) {
-            consoleView = TextConsoleBuilderFactory.getInstance().createBuilder(project).console
+    init {
+        consoleView = TextConsoleBuilderFactory.getInstance().createBuilder(project).console
+        Disposer.register(project.messageBus.connect(), consoleView)
+    }
+
+    companion object {
+        private val instances: MutableMap<Project, TicsConsole> = mutableMapOf()
+
+        fun getInstance(project: Project): TicsConsole {
+            return instances.computeIfAbsent(project) { TicsConsole(project) }
         }
-        return consoleView
     }
 
     fun attachToProcess(handler: ProcessHandler, firstLine: String? = null) {
-        if (isInitialized()) {
-            consoleView.clear()
-            firstLine?.let {
-                consoleView.print("$firstLine\n", ConsoleViewContentType.SYSTEM_OUTPUT)
-            }
-            consoleView.attachToProcess(handler)
-        } else {
-            throw Error("Console has not been registered yet.")
+        consoleView.clear()
+        firstLine?.let {
+            consoleView.print("$firstLine\n", ConsoleViewContentType.SYSTEM_OUTPUT)
         }
+        consoleView.attachToProcess(handler)
     }
 
     fun clear() {
-        if (isInitialized()) {
-            consoleView.clear()
-        } else {
-            throw Error("Console has not been registered yet.")
-        }
+        consoleView.clear()
     }
 
-    fun isInitialized(): Boolean {
-        return this::consoleView.isInitialized
+    fun getComponent(): JComponent {
+        return consoleView.component
     }
 }

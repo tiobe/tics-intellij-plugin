@@ -17,7 +17,7 @@ class ConsolePanel(project: Project) : AbstractPanel(project) {
     }
 
     private fun addConsole() {
-        val consoleView = TicsConsole.setConsoleView(project)
-        super.setContent(consoleView.component)
+        val consoleView = TicsConsole.getInstance(project)
+        super.setContent(consoleView.getComponent())
     }
 }
