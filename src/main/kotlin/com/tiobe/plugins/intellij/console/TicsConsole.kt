@@ -6,16 +6,13 @@ import com.intellij.execution.ui.ConsoleView
 import com.intellij.execution.ui.ConsoleViewContentType
 import com.intellij.openapi.Disposable
 import com.intellij.openapi.project.Project
-import com.intellij.openapi.util.Disposer
-import com.tiobe.plugins.intellij.install.InstallTics
 import javax.swing.JComponent
 
-class TicsConsole(project: Project) {
+class TicsConsole(project: Project): Disposable {
     private var consoleView: ConsoleView
 
     init {
         consoleView = TextConsoleBuilderFactory.getInstance().createBuilder(project).console
-        Disposer.register(project.messageBus.connect(), consoleView)
     }
 
     companion object {
@@ -40,5 +37,9 @@ class TicsConsole(project: Project) {
 
     fun getComponent(): JComponent {
         return consoleView.component
+    }
+
+    override fun dispose() {
+        consoleView.dispose()
     }
 }

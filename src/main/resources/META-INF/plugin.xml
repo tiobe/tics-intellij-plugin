@@ -26,6 +26,11 @@
                     icon="com.tiobe.plugins.intellij.icons.TicsIcons.TICS_LOGO"
                     anchor="bottom" canCloseContents="true"/>
     </extensions>
+    
+    <projectListeners>
+        <listener class="com.tiobe.plugins.intellij.console.ProjectListener"
+                  topic="com.intellij.openapi.project.ProjectManagerListener" />
+    </projectListeners>
 
     <actions>
         <group id="TICS">
