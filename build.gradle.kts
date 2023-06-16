@@ -5,7 +5,6 @@ plugins {
 }
 
 group = "com.tiobe"
-version = "1.0.0-beta.2"
 
 repositories {
     maven {

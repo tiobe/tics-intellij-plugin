@@ -1,0 +1,47 @@
+name: Build Artifacts
+
+on:
+  workflow_call:
+    inputs:
+      version:
+        description: Name of the uploaded artifact
+        type: string
+    outputs:
+      artifact:
+        value: ${{jobs.build.outputs.artifact}}
+  push:
+    branches: "*"
+    tags-ignore: "*"
+    paths-ignore:
+      - ".github/**"
+      - ".githooks/**"
+      - "LICENSE"
+      - "README.md"
+
+jobs:
+  gitversion:
+    uses: ./.github/workflows/gitversion.yml
+  build:
+    runs-on: self-hosted
+    needs: gitversion
+    outputs:
+      artifact: ${{steps.setname.outputs.artifact}}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Setup JDK 17
+        uses: actions/setup-java@v3
+        with:
+          distribution: temurin
+          java-version: 17
+          cache: gradle
+      - name: Build with Gradle
+        run: ./gradlew build --no-daemon -Pversion='${{needs.gitversion.outputs.fullSemVer}}'
+      - name: Set artifact name
+        id: setname
+        run: echo "artifact=tics-intellij-plugin-${{needs.gitversion.outputs.fullSemVer}}" >> $GITHUB_OUTPUT
+      - name: Upload build Artifact
+        uses: actions/upload-artifact@v3.1.2
+        with:
+          name: ${{steps.setname.outputs.artifact}}
+          path: build/distributions/${{steps.setname.outputs.artifact}}.zip

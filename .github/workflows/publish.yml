@@ -1,0 +1,23 @@
+name: Publish
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  build:
+    uses: ./.github/workflows/build-artifacts.yml
+  publish:
+    runs-on: self-hosted
+    needs: build
+    permissions:
+      contents: write
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: ${{needs.build.outputs.artifact}}
+      - name: Upload artifact
+        uses: softprops/action-gh-release@v1
+        with:
+          files: ${{needs.build.outputs.artifact}}.zip
