@@ -9,12 +9,13 @@ import com.tiobe.plugins.intellij.ui.tree.FileTreeModelBuilder
 
 class ViolationsPanel(project: Project) : AbstractPanel(project) {
     private val fileTreeModelBuilder = FileTreeModelBuilder()
-    private val tree = FileTree(project, fileTreeModelBuilder.getModel(), "No annotations to display")
+    private val informationPanel = InformationPanel()
+    private val tree = FileTree(project, fileTreeModelBuilder.getModel(), informationPanel, "No annotations to display")
 
     init {
         val splitter = OnePixelSplitter(0.5f)
         splitter.firstComponent = ScrollPaneFactory.createScrollPane(tree)
-        splitter.secondComponent = InformationPanel
+        splitter.secondComponent = informationPanel
 
         super.setContent(splitter)
 

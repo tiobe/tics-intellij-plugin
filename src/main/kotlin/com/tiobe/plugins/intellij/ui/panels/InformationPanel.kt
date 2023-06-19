@@ -6,7 +6,7 @@ import com.intellij.util.ui.JBUI
 import com.tiobe.plugins.intellij.utilities.Violation
 import java.awt.BorderLayout
 
-object InformationPanel : JBPanel<InformationPanel>(BorderLayout()) {
+class InformationPanel : JBPanel<InformationPanel>(BorderLayout()) {
     private val emptyText = JBLabel("Select a violation to display")
     private val violationPanel = ViolationPanel()
 
@@ -30,6 +30,4 @@ object InformationPanel : JBPanel<InformationPanel>(BorderLayout()) {
 
         violationPanel.displayViolation(violation)
     }
-
-
 }

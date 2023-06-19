@@ -12,7 +12,7 @@ import com.tiobe.plugins.intellij.ui.nodes.ViolationNode
 import com.tiobe.plugins.intellij.ui.panels.InformationPanel
 import javax.swing.tree.TreeModel
 
-class FileTree(private val project: Project, model: TreeModel, emptyState: String) : Tree(model), DataProvider {
+class FileTree(private val project: Project, model: TreeModel, informationPanel: InformationPanel, emptyState: String) : Tree(model), DataProvider {
 
     init {
         isRootVisible = false
@@ -23,9 +23,9 @@ class FileTree(private val project: Project, model: TreeModel, emptyState: Strin
         addTreeSelectionListener {
             val node = selectionPath?.lastPathComponent
             if (node is ViolationNode) {
-                InformationPanel.displayViolation(node.violation)
+                informationPanel.displayViolation(node.violation)
             } else {
-                InformationPanel.noViolationToDisplay()
+                informationPanel.noViolationToDisplay()
             }
         }
 
