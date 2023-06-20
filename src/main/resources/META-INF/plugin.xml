@@ -1,26 +1,74 @@
+<!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
 <idea-plugin>
+    <!-- Unique identifier of the plugin. It should be FQN. It cannot be changed between the plugin versions. -->
     <id>com.tiobe.plugins.intellij</id>
-    <name>TICS IntelliJ Plugin</name>
-    <version>0.0</version>
-    <vendor email="support@tiobe.com" url="http://www.tiobe.com">TIOBE Software B.V.</vendor>
 
+    <!-- Public plugin name should be written in Title Case.
+         Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-name -->
+    <name>TICS</name>
+
+    <!-- A displayed Vendor name or Organization ID displayed on the Plugins Page. -->
+    <vendor email="support@tiobe.com" url="http://www.tiobe.com">TIOBE Software BV</vendor>
+
+    <!-- Description of the plugin displayed on the Plugin Page and IDE Plugin Manager.
+         Simple HTML elements (text formatting, paragraphs, and lists) can be added inside of <![CDATA[ ]]> tag.
+         Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-description -->
     <description>Plugin that integrates the TICS Client into IntelliJ IDEA and Rider.</description>
 
-    <!--<change-notes></change-notes>-->
+    <!-- Product and plugin compatibility requirements.
+         Read more: https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html -->
+    <depends>com.intellij.modules.platform</depends>
 
-    <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/build_number_ranges.html for description -->
-    <idea-version since-build="145.0"/>
-
-    <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
-         on how to target different products -->
-    <!-- IDE-specific additions -->
-    <depends optional="true" config-file="rider.xml">com.intellij.modules.rider</depends>
-    <!-- add actions for every supported IDE -->
-    <depends optional="true" config-file="actions.xml">com.intellij.modules.rider</depends>
-    <depends optional="true" config-file="actions.xml">com.intellij.modules.java</depends>
-
+    <!-- Extension points defined by the plugin.
+         Read more: https://plugins.jetbrains.com/docs/intellij/plugin-extension-points.html -->
     <extensions defaultExtensionNs="com.intellij">
-        <!-- Add your extensions here -->
+        <toolWindow id="TICS" factoryClass="com.tiobe.plugins.intellij.ui.TicsToolWindowFactory"
+                    icon="com.tiobe.plugins.intellij.icons.TicsIcons.TICS_LOGO"
+                    anchor="bottom" canCloseContents="true"/>
     </extensions>
+    
+    <projectListeners>
+        <listener class="com.tiobe.plugins.intellij.console.ProjectListener"
+                  topic="com.intellij.openapi.project.ProjectManagerListener" />
+    </projectListeners>
 
+    <actions>
+        <group id="TICS">
+            <action id="TICS.AnalyzeFile" class="com.tiobe.plugins.intellij.actions.AnalyzeFile"
+                    icon="com.tiobe.plugins.intellij.icons.TicsIcons.ANALYZE_FILE" text="Analyze File with TICS"/>
+            <action id="TICS.AnalyzeProject" class="com.tiobe.plugins.intellij.actions.AnalyzeProject"
+                    icon="com.tiobe.plugins.intellij.icons.TicsIcons.ANALYZE_FOLDER" text="Analyze Project with TICS"/>
+            <action id="TICS.CancelAnalysis" class="com.tiobe.plugins.intellij.actions.CancelAnalysis"
+                    icon="com.tiobe.plugins.intellij.icons.TicsIcons.CANCEL_TICS" text="Cancel TICS Analysis"/>
+            <action id="TICS.RunTicsConfig" class="com.tiobe.plugins.intellij.actions.LaunchTicsConfig"
+                    icon="com.tiobe.plugins.intellij.icons.TicsIcons.CONFIGURE_TICS" text="TICS Configuration">
+            </action>
+        </group>
+
+        <group>
+            <separator/>
+            <reference id="TICS"/>
+            <add-to-group group-id="ToolbarRunGroup"/>
+            <add-to-group group-id="RightToolbarSideGroup" anchor="first"/>
+        </group>
+
+        <group text="TICS" popup="true">
+            <reference id="TICS"/>
+            <action id="TICS.InstallTics" class="com.tiobe.plugins.intellij.actions.InstallTicsAction"
+                    icon="AllIcons.Actions.Install" text="Install TICS"/>
+            <add-to-group group-id="ToolsMenu"/>
+        </group>
+
+        <group>
+            <separator/>
+            <action id="TICS.AnalyzeFileOrFolder" class="com.tiobe.plugins.intellij.actions.AnalyzeFileOrFolder"/>
+            <reference id="TICS.CancelAnalysis"/>
+            <separator/>
+            <add-to-group group-id="EditorPopupMenu" anchor="last"/>
+            <add-to-group group-id="ProjectViewPopupMenu" anchor="last"/>
+        </group>
+
+        <action id="TICS.ClearConsole" icon="AllIcons.Actions.GC"
+                class="com.tiobe.plugins.intellij.actions.ClearConsole" text="Clear TICS Console"/>
+    </actions>
 </idea-plugin>

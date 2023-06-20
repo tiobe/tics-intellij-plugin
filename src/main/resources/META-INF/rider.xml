@@ -1,8 +1,0 @@
-<idea-plugin>
-    <actions>
-        <!-- add an Analyze menu, which is present in IDEA but missing from Rider -->
-        <group id="AnalyzeMenu" text="Analyze" description="Analyze">
-            <add-to-group group-id="MainMenu" anchor="after" relative-to-action="CodeMenu" />
-        </group>
-    </actions>
-</idea-plugin>
