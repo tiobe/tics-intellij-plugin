@@ -50,7 +50,7 @@ dependencies {
     implementation(kotlin("stdlib-jdk8"))
     implementation("com.tiobe.utility:utility:0.1.1")
     implementation("com.tiobe.model:model:0.1.1")
-    implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.15.0")
+    implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.15.2")
 }
 kotlin {
     jvmToolchain(17)
