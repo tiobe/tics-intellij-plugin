@@ -8,7 +8,7 @@ jobs:
   build:
     uses: ./.github/workflows/build-artifacts.yml
   publish:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     needs: build
     permissions:
       contents: write
