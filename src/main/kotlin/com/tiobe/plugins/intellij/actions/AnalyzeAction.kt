@@ -41,12 +41,18 @@ abstract class AnalyzeAction : AbstractAction() {
     }
 
     private fun analyze(context: DataContext, project: Project) {
-        // try to get the file/folder from context, otherwise check if they can be retrieved from the opened editor
-        val file: VirtualFile? = PlatformDataKeys.VIRTUAL_FILE.getData(context).let {
-            it ?: project.let { it1 ->
-                FileEditorManager.getInstance(it1).selectedEditor?.file
+        // If analyzeFileOpenedInEditor is true, use the file opened in the editor. Else it will try to
+        // get the file/folder from context, otherwise check if they can be retrieved from the opened editor.
+        val file: VirtualFile? = analyzeFileOpenedInEditor().let {
+            if (it) {
+                FileEditorManager.getInstance(project).selectedEditor?.file
+            } else {
+                PlatformDataKeys.VIRTUAL_FILE.getData(context).let {virtualFile ->
+                    virtualFile ?: FileEditorManager.getInstance(project).selectedEditor?.file
+                }
             }
         }
+
         if (isFileRequired() && file == null) {
             showErrorMessageDialog(
                 ErrorMessages.NO_ACTIVE_FILE
@@ -88,4 +94,6 @@ abstract class AnalyzeAction : AbstractAction() {
     protected abstract fun getTicsCommand(file: VirtualFile?, project: Project?): GeneralCommandLine
 
     protected abstract fun isFileRequired(): Boolean
+
+    protected abstract fun analyzeFileOpenedInEditor(): Boolean
 }
