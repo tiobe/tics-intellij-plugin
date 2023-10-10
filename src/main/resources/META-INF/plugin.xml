@@ -55,7 +55,7 @@
         <group text="TICS" popup="true">
             <reference id="TICS"/>
             <action id="TICS.InstallTics" class="com.tiobe.plugins.intellij.actions.InstallTicsAction"
-                    icon="AllIcons.Actions.Install" text="Install TICS"/>
+                    icon="com.tiobe.plugins.intellij.icons.TicsIcons.INSTALL_TICS" text="Install TICS"/>
             <add-to-group group-id="ToolsMenu"/>
         </group>
 
