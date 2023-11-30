@@ -24,4 +24,8 @@ class AnalyzeProject : AnalyzeAction() {
     override fun isFileRequired(): Boolean {
         return false
     }
+
+    override fun analyzeFileOpenedInEditor(): Boolean {
+        return false
+    }
 }
