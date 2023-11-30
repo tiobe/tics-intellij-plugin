@@ -18,4 +18,8 @@ class AnalyzeFileOrFolder : AnalyzeFile() {
 
         super.update(e)
     }
+
+    override fun analyzeFileOpenedInEditor(): Boolean {
+        return false
+    }
 }

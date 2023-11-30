@@ -6,16 +6,19 @@ import javax.swing.Icon
 object TicsIcons {
 
     @JvmField
-    val ANALYZE_FILE: Icon = load("/icons/TI_analyze_file.png")
+    val ANALYZE_FILE: Icon = load("/icons/tics-file-solid.svg")
 
     @JvmField
-    val ANALYZE_FOLDER: Icon = load("/icons/TI_analyze_project.png")
+    val ANALYZE_FOLDER: Icon = load("/icons/tics-folder-solid.svg")
 
     @JvmField
-    val CANCEL_TICS: Icon = load("/icons/TI_cancel_analysis.png")
+    val CANCEL_TICS: Icon = load("/icons/tics-cancel-solid.svg")
 
     @JvmField
-    val CONFIGURE_TICS: Icon = load("/icons/TI_configuration.png")
+    val CONFIGURE_TICS: Icon = load("/icons/tics-config-solid.svg")
+
+    @JvmField
+    val INSTALL_TICS: Icon = load("/icons/tics-download-solid.svg")
 
     @JvmField
     val TICS_LOGO: Icon = load("/icons/TI_logo.svg")

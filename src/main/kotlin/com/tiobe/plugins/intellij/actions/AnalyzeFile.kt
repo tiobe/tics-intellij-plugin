@@ -23,4 +23,8 @@ open class AnalyzeFile : AnalyzeAction() {
     override fun isFileRequired(): Boolean {
         return true
     }
+
+    override fun analyzeFileOpenedInEditor(): Boolean {
+        return true
+    }
 }
