@@ -9,6 +9,8 @@ on:
     outputs:
       artifact:
         value: ${{jobs.build.outputs.artifact}}
+      version:
+        value: ${{jobs.build.outputs.version}}
   push:
     branches: "*"
     tags-ignore: "*"
@@ -26,6 +28,7 @@ jobs:
     needs: gitversion
     outputs:
       artifact: ${{steps.setname.outputs.artifact}}
+      version: ${{needs.gitversion.outputs.fullSemVer}}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
