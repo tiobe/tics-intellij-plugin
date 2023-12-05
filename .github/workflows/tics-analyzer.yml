@@ -18,7 +18,6 @@ jobs:
           cache: gradle
       - name: Build with Gradle
         run: ./gradlew build --no-daemon
-      - run: ./gradlew jacocoTestReport
       - name: Install and run TICSQSERVER
         env:
           TICSAUTHTOKEN: ${{ secrets.EBOIT_ANALYZER_TOKEN }}
