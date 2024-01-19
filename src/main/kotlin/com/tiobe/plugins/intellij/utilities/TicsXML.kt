@@ -1,8 +1,10 @@
 package com.tiobe.plugins.intellij.utilities
 
 import com.fasterxml.jackson.annotation.JsonCreator
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.fasterxml.jackson.annotation.JsonProperty
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 data class TicsXML @JsonCreator constructor(
     @JsonProperty("version") val version: String,
     @JsonProperty("format") val format: String,
@@ -10,6 +12,7 @@ data class TicsXML @JsonCreator constructor(
     @JsonProperty("SolvedViolations") val solvedViolations: List<Violation>
 )
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 data class Violation @JsonCreator constructor(
     @JsonProperty("File") val file: String,
     @JsonProperty("Line") val line: Int,

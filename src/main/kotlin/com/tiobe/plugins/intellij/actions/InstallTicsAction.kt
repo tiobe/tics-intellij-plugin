@@ -5,7 +5,6 @@ import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.actionSystem.PlatformDataKeys
 import com.intellij.openapi.project.Project
-import com.tiobe.plugins.intellij.console.TicsConsole
 import com.tiobe.plugins.intellij.install.InstallTics
 
 
