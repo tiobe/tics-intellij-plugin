@@ -18,7 +18,7 @@ intellij {
     version.set("2022.2.4")
     type.set("IC") // Target IDE Platform
 
-    plugins.set(listOf(/* Plugin Dependencies */))
+    updateSinceUntilBuild.set(false)
 }
 
 tasks {
@@ -31,10 +31,7 @@ tasks {
         kotlinOptions.jvmTarget = "17"
     }
 
-    patchPluginXml {
-        sinceBuild.set("222")
-        untilBuild.set("232.*")
-    }
+    patchPluginXml { }
 
     signPlugin {
         certificateChain.set(System.getenv("CERTIFICATE_CHAIN"))
