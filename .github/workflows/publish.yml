@@ -18,7 +18,7 @@ jobs:
         with:
           name: ${{needs.build.outputs.artifact}}
       - name: Upload artifact
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         with:
           files: ${{needs.build.outputs.artifact}}.zip
       - name: Upload artifact to artifact repository
