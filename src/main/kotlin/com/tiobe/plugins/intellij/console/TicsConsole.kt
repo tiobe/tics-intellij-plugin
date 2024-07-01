@@ -4,15 +4,17 @@ import com.intellij.execution.filters.TextConsoleBuilderFactory
 import com.intellij.execution.process.ProcessHandler
 import com.intellij.execution.ui.ConsoleView
 import com.intellij.execution.ui.ConsoleViewContentType
-import com.intellij.openapi.Disposable
+import com.intellij.openapi.components.service
 import com.intellij.openapi.project.Project
+import com.intellij.openapi.util.Disposer
 import javax.swing.JComponent
 
-class TicsConsole(project: Project): Disposable {
-    private var consoleView: ConsoleView
+class TicsConsole(project: Project) {
+    private var consoleView: ConsoleView = TextConsoleBuilderFactory.getInstance().createBuilder(project).console
 
     init {
-        consoleView = TextConsoleBuilderFactory.getInstance().createBuilder(project).console
+        val service = project.service<ProjectListener>()
+        Disposer.register(service, consoleView)
     }
 
     companion object {
@@ -37,9 +39,5 @@ class TicsConsole(project: Project): Disposable {
 
     fun getComponent(): JComponent {
         return consoleView.component
-    }
-
-    override fun dispose() {
-        consoleView.dispose()
     }
 }

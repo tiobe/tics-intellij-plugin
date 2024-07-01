@@ -1,19 +1,18 @@
 package com.tiobe.plugins.intellij.pane
 
+import com.intellij.openapi.ui.DialogPanel
 import com.intellij.openapi.ui.DialogWrapper
 import com.intellij.openapi.ui.ValidationInfo
-import com.intellij.util.ui.UI
+import com.intellij.ui.dsl.builder.panel
 import com.tiobe.plugins.intellij.errors.ErrorMessages
 import com.tiobe.plugins.intellij.pane.TicsOptionPane.Companion.showErrorMessageDialog
 import com.tiobe.plugins.intellij.pane.TicsOptionPane.Companion.showErrorMessageDialogWithLink
 import com.tiobe.plugins.intellij.utilities.TicsAuthToken
 import org.apache.hc.core5.net.URIBuilder
-import javax.swing.JComponent
-import javax.swing.JLabel
 import javax.swing.JTextField
 
 class ViewerUrlDialogWrapper(value: String? = null) : DialogWrapper(true) {
-    private val jTextField: JTextField = JTextField(value)
+    private var jTextField = JTextField(value)
     var input: String? = null
 
     init {
@@ -21,14 +20,18 @@ class ViewerUrlDialogWrapper(value: String? = null) : DialogWrapper(true) {
         init()
     }
 
-    override fun createCenterPanel(): JComponent {
-        return UI.PanelFactory.grid()
-            .add(UI.PanelFactory.panel(JLabel("Insert the TICS Viewer configuration url.")))
-            .add(
-                UI.PanelFactory.panel(jTextField)
-                    .withComment("http(s)://domain(:port)/tiobeweb/section/api/cfg?name=configuration")
-            )
-            .createPanel()
+    override fun createCenterPanel(): DialogPanel {
+        return panel {
+            row {
+                label("Insert the TICS Viewer configuration url.")
+            }
+            row {
+                cell(jTextField)
+            }
+            row {
+                comment("http(s)://domain(:port)/tiobeweb/section/api/cfg?name=configuration")
+            }
+        }
     }
 
     override fun doValidate(): ValidationInfo? {

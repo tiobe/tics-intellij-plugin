@@ -1,7 +1,7 @@
 <!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
 <idea-plugin>
-    <!-- This plugin supports 2022.2 or later. -->
-    <idea-version since-build="222"/>
+    <!-- This plugin supports 2023.1 or later. -->
+    <idea-version since-build="231.8109.175"/>
 
     <!-- Unique identifier of the plugin. It should be FQN. It cannot be changed between the plugin versions. -->
     <id>com.tiobe.plugins.intellij</id>
@@ -28,12 +28,8 @@
         <toolWindow id="TICS" factoryClass="com.tiobe.plugins.intellij.ui.TicsToolWindowFactory"
                     icon="com.tiobe.plugins.intellij.icons.TicsIcons.TICS_LOGO"
                     anchor="bottom" canCloseContents="true"/>
+        <postStartupActivity implementation="com.tiobe.plugins.intellij.console.ProjectStartup"/>
     </extensions>
-    
-    <projectListeners>
-        <listener class="com.tiobe.plugins.intellij.console.ProjectListener"
-                  topic="com.intellij.openapi.project.ProjectManagerListener" />
-    </projectListeners>
 
     <actions>
         <group id="TICS">
@@ -48,21 +44,21 @@
             </action>
         </group>
 
-        <group>
+        <group id="toolbars">
             <separator/>
             <reference id="TICS"/>
             <add-to-group group-id="ToolbarRunGroup"/>
             <add-to-group group-id="RightToolbarSideGroup" anchor="first"/>
         </group>
 
-        <group text="TICS" popup="true">
+        <group id="menu" text="TICS" popup="true">
             <reference id="TICS"/>
             <action id="TICS.InstallTics" class="com.tiobe.plugins.intellij.actions.InstallTicsAction"
                     icon="com.tiobe.plugins.intellij.icons.TicsIcons.INSTALL_TICS" text="Install TICS"/>
             <add-to-group group-id="ToolsMenu"/>
         </group>
 
-        <group>
+        <group id="popup-menus">
             <separator/>
             <action id="TICS.AnalyzeFileOrFolder" class="com.tiobe.plugins.intellij.actions.AnalyzeFileOrFolder"/>
             <reference id="TICS.CancelAnalysis"/>

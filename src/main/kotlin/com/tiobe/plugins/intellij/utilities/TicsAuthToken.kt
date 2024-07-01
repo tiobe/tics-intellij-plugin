@@ -10,6 +10,7 @@ import org.apache.hc.core5.http.io.entity.EntityUtils
 import org.apache.hc.core5.util.Timeout
 import java.io.FileNotFoundException
 import java.io.FileReader
+import java.nio.file.Path
 
 object TicsAuthToken {
     private var authToken: String? = null
@@ -67,9 +68,9 @@ object TicsAuthToken {
         if (ticsAuthToken == null) {
             var tokenPath = ""
             if (SystemInfo.isLinux) {
-                tokenPath = System.getProperty("user.home") + "/.tics/tics_client.token"
+                tokenPath = Path.of(System.getProperty("user.home"), ".tics", "tics_client.token").toString()
             } else if (SystemInfo.isWindows) {
-                tokenPath = System.getenv("APPDATA") + "\\TICS\\tics_client.token"
+                tokenPath = Path.of(System.getenv("APPDATA") + "TICS","tics_client.token").toString()
             }
             return try {
                 println(tokenPath)
@@ -87,7 +88,8 @@ object TicsAuthToken {
         val fileType: String,
         val token: String,
         val description: String,
-        val role: String
+        val role: String?,
+        val user: String?,
     )
 
     data class ValidAuthTokenInfo(

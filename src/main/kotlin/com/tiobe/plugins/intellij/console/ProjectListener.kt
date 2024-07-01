@@ -1,16 +1,13 @@
 package com.tiobe.plugins.intellij.console
 
+import com.intellij.openapi.Disposable
+import com.intellij.openapi.components.Service
 import com.intellij.openapi.project.Project
-import com.intellij.openapi.project.ProjectManagerListener
-import com.intellij.openapi.util.Disposer
 
-class ProjectListener : ProjectManagerListener {
-
-    override fun projectOpened(project: Project) {
-        TicsConsole.getInstance(project)
+@Service(Service.Level.PROJECT)
+class ProjectListener(private val project: Project) : Disposable {
+    override fun dispose() {
+        /* No code needed here */
     }
 
-    override fun projectClosing(project: Project) {
-        Disposer.dispose(TicsConsole.getInstance(project))
-    }
 }
