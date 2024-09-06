@@ -25,5 +25,5 @@ jobs:
           project: IntelliJ
           branchdir: ${{ github.workspace }}
           viewerUrl: https://eboit.tiobe.com/tiobeweb/TICS/api/cfg?name=main
-          ticsAuthToken: ${{ secrets.EBOIT_CLIENT_TOKEN }}
+          ticsAuthToken: ${{ secrets.EBOIT_ANALYZER_TOKEN }}
           installTics: true
