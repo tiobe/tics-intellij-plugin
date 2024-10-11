@@ -205,7 +205,7 @@ object InstallTics : Disposable {
         if (System.getenv("TICSTRUSTSTRATEGY") == "all" || System.getenv("TICSTRUSTSTRATEGY") == "self-signed") {
             trustStrategy = "[System.Net.ServicePointManager]::ServerCertificateValidationCallback = {\$true};"
         }
-        return "Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; \$env:TICSIDE='INTELLIJ'; $trustStrategy iex ((New-Object System.Net.WebClient).DownloadString('$installUrl')); \$env:TICSIDE=\$null;"
+        return "[System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; \$env:TICSIDE='INTELLIJ'; $trustStrategy iex ((New-Object System.Net.WebClient).DownloadString('$installUrl')); \$env:TICSIDE=\$null;"
     }
 
     private data class ArtifactsResponse(
