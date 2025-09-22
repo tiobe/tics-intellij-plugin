@@ -6,25 +6,25 @@ import com.fasterxml.jackson.annotation.JsonProperty
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 data class TicsXML @JsonCreator constructor(
-    @JsonProperty("version") val version: String,
-    @JsonProperty("format") val format: String,
-    @JsonProperty("Violations") val violations: List<Violation>,
-    @JsonProperty("SolvedViolations") val solvedViolations: List<Violation>
+    @param:JsonProperty("version") val version: String,
+    @param:JsonProperty("format") val format: String,
+    @param:JsonProperty("Violations") val violations: List<Violation>,
+    @param:JsonProperty("SolvedViolations") val solvedViolations: List<Violation>
 )
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 data class Violation @JsonCreator constructor(
-    @JsonProperty("File") val file: String,
-    @JsonProperty("Line") val line: Int,
-    @JsonProperty("Synopsis") val synopsis: String,
-    @JsonProperty("Suppressed") val suppressed: TicsBoolean,
-    @JsonProperty("Language") val language: String,
-    @JsonProperty("RuleId") val ruleId: String,
-    @JsonProperty("Category") val category: String,
-    @JsonProperty("Level") val level: Int,
-    @JsonProperty("Message") val message: String?,
-    @JsonProperty("Reference") val reference: String?,
-    @JsonProperty("New") val new: TicsBoolean?,
+    @param:JsonProperty("File") val file: String,
+    @param:JsonProperty("Line") val line: Int,
+    @param:JsonProperty("Synopsis") val synopsis: String,
+    @param:JsonProperty("Suppressed") val suppressed: TicsBoolean,
+    @param:JsonProperty("Language") val language: String,
+    @param:JsonProperty("RuleId") val ruleId: String,
+    @param:JsonProperty("Category") val category: String,
+    @param:JsonProperty("Level") val level: Int,
+    @param:JsonProperty("Message") val message: String?,
+    @param:JsonProperty("Reference") val reference: String?,
+    @param:JsonProperty("New") val new: TicsBoolean?,
 )
 
 enum class TicsBoolean(val value: Boolean) {

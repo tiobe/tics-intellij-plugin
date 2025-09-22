@@ -4,7 +4,7 @@ import com.intellij.icons.AllIcons
 import com.intellij.openapi.actionSystem.ActionUpdateThread
 import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.project.Project
-import com.intellij.openapi.ui.showOkCancelDialog
+import com.intellij.openapi.ui.Messages
 import com.tiobe.plugins.intellij.install.InstallTics
 
 abstract class AbstractAction : AnAction() {
@@ -16,7 +16,7 @@ abstract class AbstractAction : AnAction() {
      */
     fun ticsInstalledWrapper(project: Project): Boolean {
         return if (!InstallTics.isTicsInstalled()) {
-            val exitCode = showOkCancelDialog(
+            val exitCode = Messages.showOkCancelDialog(
                 "TICS Is Not Installed",
                 "TICS is not installed on this machine, do you want to do this now?",
                 "Install",

@@ -7,8 +7,9 @@ import com.intellij.execution.process.OSProcessHandler
 import com.intellij.icons.AllIcons
 import com.intellij.openapi.Disposable
 import com.intellij.openapi.application.ApplicationManager
+import com.intellij.openapi.components.service
 import com.intellij.openapi.project.Project
-import com.intellij.openapi.ui.showOkCancelDialog
+import com.intellij.openapi.ui.Messages
 import com.intellij.openapi.util.SystemInfo
 import com.tiobe.model.AlertMessages
 import com.tiobe.plugins.intellij.analysis.ProcessRunner
@@ -90,7 +91,7 @@ object InstallTics : Disposable {
             )
             return
         }
-        TicsConsole.getInstance(project).attachToProcess(handler)
+        project.service<TicsConsole>().attachToProcess(handler)
     }
 
     /**
@@ -98,7 +99,7 @@ object InstallTics : Disposable {
      */
     private fun onHandlerTerminated(exitCode: Int) {
         if (exitCode == 0) {
-            val dialogExitCode = showOkCancelDialog(
+            val dialogExitCode = Messages.showOkCancelDialog(
                 "Reload Required",
                 "In order to complete the TICS installation, the IDE needs to be closed and restarted. Do you want to do this now?",
                 "Shutdown Now",
@@ -203,9 +204,9 @@ object InstallTics : Disposable {
     private fun getWindowsInstall(installUrl: String): String {
         var trustStrategy = ""
         if (System.getenv("TICSTRUSTSTRATEGY") == "all" || System.getenv("TICSTRUSTSTRATEGY") == "self-signed") {
-            trustStrategy = "[System.Net.ServicePointManager]::ServerCertificateValidationCallback = {\$true};"
+            trustStrategy = $$"[System.Net.ServicePointManager]::ServerCertificateValidationCallback = {$true};"
         }
-        return "Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; \$env:TICSIDE='INTELLIJ'; $trustStrategy iex ((New-Object System.Net.WebClient).DownloadString('$installUrl')); \$env:TICSIDE=\$null;"
+        return $$"Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; $env:TICSIDE='INTELLIJ'; $$trustStrategy iex ((New-Object System.Net.WebClient).DownloadString('$$installUrl')); $env:TICSIDE=$null;"
     }
 
     private data class ArtifactsResponse(

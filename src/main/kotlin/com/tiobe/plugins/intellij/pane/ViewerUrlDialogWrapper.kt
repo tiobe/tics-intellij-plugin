@@ -2,6 +2,7 @@ package com.tiobe.plugins.intellij.pane
 
 import com.intellij.openapi.ui.DialogWrapper
 import com.intellij.openapi.ui.ValidationInfo
+import com.intellij.ui.dsl.builder.panel
 import com.intellij.util.ui.UI
 import com.tiobe.plugins.intellij.errors.ErrorMessages
 import com.tiobe.plugins.intellij.pane.TicsOptionPane.Companion.showErrorMessageDialog
@@ -22,13 +23,14 @@ class ViewerUrlDialogWrapper(value: String? = null) : DialogWrapper(true) {
     }
 
     override fun createCenterPanel(): JComponent {
-        return UI.PanelFactory.grid()
-            .add(UI.PanelFactory.panel(JLabel("Insert the TICS Viewer configuration url.")))
-            .add(
-                UI.PanelFactory.panel(jTextField)
-                    .withComment("http(s)://domain(:port)/tiobeweb/section/api/cfg?name=configuration")
-            )
-            .createPanel()
+        return panel {
+            row {
+                label("Insert the TICS Viewer configuration url.")
+            }
+            row {
+                cell(jTextField).comment("http(s)://domain(:port)/tiobeweb/section/api/cfg?name=configuration")
+            }
+        }
     }
 
     override fun doValidate(): ValidationInfo? {
