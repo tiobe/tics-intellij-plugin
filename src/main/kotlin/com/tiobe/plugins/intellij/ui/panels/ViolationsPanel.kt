@@ -6,6 +6,7 @@ import com.intellij.ui.ScrollPaneFactory
 import com.tiobe.plugins.intellij.ui.analysis.ProcessAnalysis
 import com.tiobe.plugins.intellij.ui.tree.FileTree
 import com.tiobe.plugins.intellij.ui.tree.FileTreeModelBuilder
+import org.jetbrains.annotations.NonNls
 
 class ViolationsPanel(project: Project) : AbstractPanel(project) {
     private val fileTreeModelBuilder = FileTreeModelBuilder()
@@ -20,5 +21,9 @@ class ViolationsPanel(project: Project) : AbstractPanel(project) {
         super.setContent(splitter)
 
         ProcessAnalysis(project, fileTreeModelBuilder)
+    }
+
+    override fun getData(dataId: @NonNls String): Any? {
+        return tree.getData(dataId)
     }
 }

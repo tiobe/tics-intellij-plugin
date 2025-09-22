@@ -22,6 +22,7 @@ import com.tiobe.utility.TicsHttpClient
 import org.apache.hc.client5.http.classic.methods.HttpGet
 import org.apache.hc.core5.http.io.entity.EntityUtils
 import org.apache.hc.core5.net.URIBuilder
+import java.net.URI
 import java.net.URL
 
 
@@ -33,14 +34,14 @@ object InstallTics : Disposable {
             return isInstalled!!
         }
 
-        var command = ""
+        var command: Array<String> = arrayOf()
         if (SystemInfo.isLinux) {
-            command = "which TICS"
+            command = arrayOf("which", "TICS")
         } else if (SystemInfo.isWindows) {
-            command = "where TICS"
+            command = arrayOf("where", "TICS")
         }
 
-        isInstalled = if (command != "") {
+        isInstalled = if (command.isNotEmpty()) {
             val process = Runtime.getRuntime().exec(command)
             val exitCode = process.waitFor()
             println("$command exited with code $exitCode")
@@ -180,7 +181,7 @@ object InstallTics : Disposable {
         val apiMarker = "/api/"
 
         if (url.contains(apiMarker)) {
-            return URL(url.split(apiMarker)[0])
+            return URI(url.split(apiMarker)[0]).toURL()
         }
         throw Exception("Incorrect TICS Viewer url was given.")
     }

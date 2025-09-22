@@ -15,7 +15,6 @@ open class AbstractPanel(val project: Project) : SimpleToolWindowPanel(false, tr
     private lateinit var mainToolbar: ActionToolbar
 
     init {
-
         addToolbar()
 
         project.messageBus.connect().subscribe(
