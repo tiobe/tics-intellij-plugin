@@ -38,7 +38,6 @@ dependencies {
         create(type = IntelliJPlatformType.IntellijIdeaCommunity, version = "2023.3")
     }
 
-    implementation(kotlin("stdlib-jdk8"))
     implementation("com.tiobe.toolkit:utility:0.1.1")
     implementation("com.tiobe.toolkit:model:0.1.1")
     implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.20.0")
