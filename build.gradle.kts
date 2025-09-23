@@ -35,7 +35,7 @@ intellijPlatform {
 
 dependencies {
     intellijPlatform {
-        create(type = IntelliJPlatformType.IntellijIdeaCommunity, version = "2023.3")
+        create(type = "IC", version = "2023.3")
     }
 
     implementation("com.tiobe.toolkit:utility:0.1.1")
