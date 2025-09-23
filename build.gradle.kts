@@ -1,4 +1,3 @@
-import org.jetbrains.intellij.platform.gradle.IntelliJPlatformType
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
@@ -50,7 +49,11 @@ tasks {
         targetCompatibility = "17"
     }
     withType<KotlinCompile> {
-        compilerOptions.jvmTarget.set(JvmTarget.JVM_17)
+        compilerOptions {
+            jvmTarget = JvmTarget.JVM_17
+            allWarningsAsErrors = true
+        }
+
     }
 }
 
