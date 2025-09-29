@@ -7,8 +7,9 @@ import com.intellij.execution.process.OSProcessHandler
 import com.intellij.icons.AllIcons
 import com.intellij.openapi.Disposable
 import com.intellij.openapi.application.ApplicationManager
+import com.intellij.openapi.components.service
 import com.intellij.openapi.project.Project
-import com.intellij.openapi.ui.showOkCancelDialog
+import com.intellij.openapi.ui.Messages
 import com.intellij.openapi.util.SystemInfo
 import com.tiobe.model.AlertMessages
 import com.tiobe.plugins.intellij.analysis.ProcessRunner
@@ -21,6 +22,7 @@ import com.tiobe.utility.TicsHttpClient
 import org.apache.hc.client5.http.classic.methods.HttpGet
 import org.apache.hc.core5.http.io.entity.EntityUtils
 import org.apache.hc.core5.net.URIBuilder
+import java.net.URI
 import java.net.URL
 
 
@@ -32,14 +34,14 @@ object InstallTics : Disposable {
             return isInstalled!!
         }
 
-        var command = ""
+        var command: Array<String> = arrayOf()
         if (SystemInfo.isLinux) {
-            command = "which TICS"
+            command = arrayOf("which", "TICS")
         } else if (SystemInfo.isWindows) {
-            command = "where TICS"
+            command = arrayOf("where", "TICS")
         }
 
-        isInstalled = if (command != "") {
+        isInstalled = if (command.isNotEmpty()) {
             val process = Runtime.getRuntime().exec(command)
             val exitCode = process.waitFor()
             println("$command exited with code $exitCode")
@@ -90,7 +92,7 @@ object InstallTics : Disposable {
             )
             return
         }
-        TicsConsole.getInstance(project).attachToProcess(handler)
+        project.service<TicsConsole>().attachToProcess(handler)
     }
 
     /**
@@ -98,7 +100,7 @@ object InstallTics : Disposable {
      */
     private fun onHandlerTerminated(exitCode: Int) {
         if (exitCode == 0) {
-            val dialogExitCode = showOkCancelDialog(
+            val dialogExitCode = Messages.showOkCancelDialog(
                 "Reload Required",
                 "In order to complete the TICS installation, the IDE needs to be closed and restarted. Do you want to do this now?",
                 "Shutdown Now",
@@ -179,7 +181,7 @@ object InstallTics : Disposable {
         val apiMarker = "/api/"
 
         if (url.contains(apiMarker)) {
-            return URL(url.split(apiMarker)[0])
+            return URI(url.split(apiMarker)[0]).toURL()
         }
         throw Exception("Incorrect TICS Viewer url was given.")
     }
@@ -203,9 +205,9 @@ object InstallTics : Disposable {
     private fun getWindowsInstall(installUrl: String): String {
         var trustStrategy = ""
         if (System.getenv("TICSTRUSTSTRATEGY") == "all" || System.getenv("TICSTRUSTSTRATEGY") == "self-signed") {
-            trustStrategy = "[System.Net.ServicePointManager]::ServerCertificateValidationCallback = {\$true};"
+            trustStrategy = $$"[System.Net.ServicePointManager]::ServerCertificateValidationCallback = {$true};"
         }
-        return "[System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; \$env:TICSIDE='INTELLIJ'; $trustStrategy iex ((New-Object System.Net.WebClient).DownloadString('$installUrl')); \$env:TICSIDE=\$null;"
+        return $$"[System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; $env:TICSIDE='INTELLIJ'; $$trustStrategy iex ((New-Object System.Net.WebClient).DownloadString('$$installUrl')); $env:TICSIDE=$null;"
     }
 
     private data class ArtifactsResponse(

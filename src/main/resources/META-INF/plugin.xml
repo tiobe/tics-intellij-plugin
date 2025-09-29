@@ -29,11 +29,6 @@
                     icon="com.tiobe.plugins.intellij.icons.TicsIcons.TICS_LOGO"
                     anchor="bottom" canCloseContents="true"/>
     </extensions>
-    
-    <projectListeners>
-        <listener class="com.tiobe.plugins.intellij.console.ProjectListener"
-                  topic="com.intellij.openapi.project.ProjectManagerListener" />
-    </projectListeners>
 
     <actions>
         <group id="TICS">
@@ -50,13 +45,13 @@
 
         <group>
             <separator/>
-            <reference id="TICS"/>
+            <reference ref="TICS"/>
             <add-to-group group-id="ToolbarRunGroup"/>
             <add-to-group group-id="RightToolbarSideGroup" anchor="first"/>
         </group>
 
         <group text="TICS" popup="true">
-            <reference id="TICS"/>
+            <reference ref="TICS"/>
             <action id="TICS.InstallTics" class="com.tiobe.plugins.intellij.actions.InstallTicsAction"
                     icon="com.tiobe.plugins.intellij.icons.TicsIcons.INSTALL_TICS" text="Install TICS"/>
             <add-to-group group-id="ToolsMenu"/>
@@ -65,7 +60,7 @@
         <group>
             <separator/>
             <action id="TICS.AnalyzeFileOrFolder" class="com.tiobe.plugins.intellij.actions.AnalyzeFileOrFolder"/>
-            <reference id="TICS.CancelAnalysis"/>
+            <reference ref="TICS.CancelAnalysis"/>
             <separator/>
             <add-to-group group-id="EditorPopupMenu" anchor="last"/>
             <add-to-group group-id="ProjectViewPopupMenu" anchor="last"/>

@@ -47,7 +47,7 @@ object TicsAuthToken {
                         Response(it.code, entity)
                     }
                 }
-            } catch (e: Exception) {
+            } catch (_: Exception) {
                 Response(408, "The following viewer could not be reached: ")
             }
         }

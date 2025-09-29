@@ -4,6 +4,7 @@ import com.intellij.execution.ExecutionException
 import com.intellij.execution.configurations.GeneralCommandLine
 import com.intellij.execution.process.OSProcessHandler
 import com.intellij.openapi.actionSystem.*
+import com.intellij.openapi.components.service
 import com.intellij.openapi.fileEditor.FileDocumentManager
 import com.intellij.openapi.fileEditor.FileEditorManager
 import com.intellij.openapi.project.Project
@@ -83,7 +84,7 @@ abstract class AnalyzeAction : AbstractAction() {
             null
         }
 
-        TicsConsole.getInstance(project).attachToProcess(handler, firstLine)
+        project.service<TicsConsole>().attachToProcess(handler, firstLine)
     }
 
     override fun update(e: AnActionEvent) {

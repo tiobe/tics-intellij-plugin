@@ -14,6 +14,7 @@ ticstmpdir
 .idea/workspace.xml
 .idea/libraries/
 .idea/sonarlint/
+.intellijPlatform
 *.iws
 *.iml
 *.ipr

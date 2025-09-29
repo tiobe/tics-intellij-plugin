@@ -39,7 +39,7 @@ jobs:
           java-version: 17
           cache: gradle
       - name: Build with Gradle
-        run: ./gradlew build --no-daemon -Pversion='${{needs.gitversion.outputs.fullSemVer}}'
+        run: ./gradlew buildPlugin --no-daemon -Pversion='${{needs.gitversion.outputs.fullSemVer}}'
       - name: Set artifact name
         id: setname
         run: echo "artifact=tics-intellij-plugin-${{needs.gitversion.outputs.fullSemVer}}" >> $GITHUB_OUTPUT
