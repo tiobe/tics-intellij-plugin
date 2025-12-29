@@ -37,8 +37,8 @@ dependencies {
         create(type = "IC", version = "2023.3")
     }
 
-    implementation("com.tiobe.toolkit:utility:0.1.1")
-    implementation("com.tiobe.toolkit:model:0.1.1")
+    implementation("com.tiobe.toolkit:utility:0.1.2")
+    implementation("com.tiobe.toolkit:model:0.1.2")
     implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.20.0")
 }
 
