@@ -39,7 +39,7 @@ dependencies {
 
     implementation("com.tiobe.toolkit:utility:0.1.1")
     implementation("com.tiobe.toolkit:model:0.1.1")
-    implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.20.0")
+    implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.21.0")
 }
 
 tasks {
